@@ -12,7 +12,7 @@ export class PageService {
         this.currentPage = {
           id: 1,
             title: 'test1',
-            components: [{
+            customComponents: [{
               id: 1,
               name: 'checkbox',
               attributes: [{

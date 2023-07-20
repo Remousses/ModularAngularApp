@@ -1,5 +1,5 @@
 <div style="border: 1px solid orange;">
-    <div *ngFor="let comp of page.components" cdkDrag [cdkDragFreeDragPosition]="comp.dropPoint" (cdkDragEnded)="dragEnd($event, comp.id)">
+    <div *ngFor="let comp of page.customComponents" cdkDrag [cdkDragFreeDragPosition]="comp.dropPoint" (cdkDragEnded)="dragEnd($event, comp.id)">
         <div style="border: 1px solid green; height: 100%;">
             <div class="example-handle" cdkDragHandle style="border: 1px solid red;">
                 <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
@@ -8,7 +8,7 @@
                 </svg>
             </div>
         </div>
-        
+
         <div ctrl-factory [componentName]="comp.name" [attributes]="comp.attributes"></div>
     </div>
 </div>
