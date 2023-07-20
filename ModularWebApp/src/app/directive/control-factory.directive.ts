@@ -23,10 +23,7 @@ export class ControlFactoryDirective implements OnChanges {
         private container: ViewContainerRef) { }
 
     ngOnChanges() {
-        console.log("directive");
-        
         if (!this.componentName) return;
-
         if(!ControlFactoryDirective.TYPE_MAP[this.componentName]) {
             throw new Error(`No class defined in TYPE_MAP for '${this.componentName}'`);
         }
@@ -34,7 +31,20 @@ export class ControlFactoryDirective implements OnChanges {
         const compRef = this.container.createComponent(ControlFactoryDirective.TYPE_MAP[this.componentName]);
         
         if (this.attributes) {
-            this.attributes.forEach(attr => compRef.setInput(attr.name, attr.value));
+            this.attributes.forEach(attr => {
+                switch (attr.type) {
+                    case 'Boolean':
+                        attr.value = (/true/i).test(attr.value);
+                        break;
+                    case 'Number':
+                        attr.value = parseInt(attr.value);
+                        break;
+                    case 'Float':
+                        attr.value = parseFloat(attr.value);
+                        break;
+                }
+                compRef.setInput(attr.name, attr.value)
+            });
         }
     }
 }

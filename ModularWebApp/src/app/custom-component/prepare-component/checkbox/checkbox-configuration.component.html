@@ -1,0 +1,10 @@
+Checkbox configuration
+<br><br>
+<mat-form-field class="example-form-field">
+    <mat-label>Component name</mat-label>
+    <input matInput type="text" [(ngModel)]="componentName">
+</mat-form-field>
+
+<app-checkbox></app-checkbox>
+<button mat-button (click)="save()">Save</button>
+<button mat-button *ngIf="saved" (click)="integrate()">Integrate</button>
