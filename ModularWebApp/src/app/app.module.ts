@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { HttpClientModule } from "@angular/common/http";
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
@@ -37,9 +38,10 @@ import { CheckboxComponent } from './custom-component/checkbox/checkbox.componen
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     AppRoutingModule,
     NgxJsonViewerModule,
+    HttpClientModule,
+    FormsModule,
     DragDropModule,
     MatCardModule,
     MatCheckboxModule,

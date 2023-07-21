@@ -1,50 +1,27 @@
 import { Injectable } from "@angular/core";
 import { Page } from "../interface/page.interface";
+import { HttpClient } from "@angular/common/http";
+import { UrlConstant } from "../util/constant/UrlConstant";
+import { Observable } from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class PageService {
-    pages = new Set<Page>;
-    currentPage!: Page;
+  pages = new Set<Page>;
+  currentPage!: Page;
 
-    findCurrentPage() {
-        this.currentPage = {
-          id: 1,
-            title: 'test1',
-            customComponents: [{
-              id: 1,
-              name: 'checkbox',
-              attributes: [{
-                name: 'checked',
-                type: 'Boolean',
-                value: 'true'
-              }],
-              // dropPoint: {x: 20, y: 50}
-            // }, {
-            //   id: 2,
-            //   name: 'checkbox',
-            //   attributes: [{
-            //     name: 'indeterminate',
-                // type: 'Boolean',
-            //     value: 'true'
-            //   }]
-            // }, {
-            //   id: 3,
-            //   name: 'checkbox',
-            //   attributes: [{
-            //     name: 'indeterminate',
-            //     value: true
-            //   }]
-            }]
-          };
-    }
+  constructor(private http: HttpClient) {}
 
-    getCurrentPage() {
-        return this.currentPage;
-    }
+  findCurrentPage(title:  string): Observable<Page> { 
+    return this.http.get<Page>(UrlConstant.pageUrl + title); 
+  }
 
-    getPages() {
+  getCurrentPage() {
+    return this.currentPage;
+  }
 
-    }
+  getPages(): Observable<Page[]> {
+    return this.http.get<Page[]>(UrlConstant.pageUrl); 
+  }
 }

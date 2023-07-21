@@ -14,7 +14,7 @@ import { Attribute } from '../interface/attribute.interface';
 })
 export class ControlFactoryDirective implements OnChanges {
     static readonly TYPE_MAP: any = {
-        "Checkbox": CheckboxComponent
+        'Checkbox': CheckboxComponent
     };
     @Input() componentType = '';
     @Input() attributes: Attribute[] | undefined = [];

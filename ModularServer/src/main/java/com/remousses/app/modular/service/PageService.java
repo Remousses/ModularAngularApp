@@ -12,4 +12,6 @@ import java.util.List;
 public interface PageService {
 
     List<Page> getPages();
+
+    Page getPageByTitle(String title);
 }

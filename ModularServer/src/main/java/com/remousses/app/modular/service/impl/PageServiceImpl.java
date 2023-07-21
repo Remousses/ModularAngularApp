@@ -16,6 +16,9 @@ public class PageServiceImpl implements PageService {
 
     public List<Page> getPages() {
         return pageRepository.findAll();
+    }
 
+    public Page getPageByTitle(String title) {
+        return pageRepository.findByTitle(title);
     }
 }
