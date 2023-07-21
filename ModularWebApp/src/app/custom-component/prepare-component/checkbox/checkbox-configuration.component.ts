@@ -26,18 +26,24 @@ export class CheckboxConfigurationComponent implements OnInit, AfterViewInit  {
 
   save() {
     if (this.componentName) {
-      this.checked = this.checkbox.checked;
-      this.saved = true;
+      const page = this.pageService.getCurrentPage();
+      if (page.id) {
+        const component: CustomComponent = {
+          name: this.componentName,
+          type: 'Checkbox'
+        };
+        this.componentService.addComponent(page.id, component);
+      }
     }
   }
 
   integrate() {
-    const page = this.pageService.getCurrentPage();
-    if (page.id) {
-      const component: CustomComponent = {
-        name: this.componentName
-      };
-      this.componentService.addComponent(page.id, component);
-    }
+    // const page = this.pageService.getCurrentPage();
+    // if (page.id) {
+    //   const component: CustomComponent = {
+    //     name: this.componentName
+    //   };
+    //   this.componentService.addComponent(page.id, component);
+    // }
   }
 }

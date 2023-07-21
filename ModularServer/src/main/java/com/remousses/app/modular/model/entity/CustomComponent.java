@@ -30,6 +30,8 @@ public class CustomComponent {
 	@Column(name = "drop_point")
 	private JsonNode dropPoint;
 
+	private String type;
+
 	@ManyToOne
 	@JoinColumn(name = "pageId")
 	@JsonIgnore

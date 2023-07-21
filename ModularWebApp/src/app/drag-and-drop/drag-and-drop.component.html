@@ -1,4 +1,4 @@
-<div style="border: 1px solid orange;">
+<div *ngIf="page" style="border: 1px solid orange;">
     <div *ngFor="let comp of page.customComponents" cdkDrag [cdkDragFreeDragPosition]="comp.dropPoint" (cdkDragEnded)="dragEnd($event, comp.id)">
         <div style="border: 1px solid green; height: 100%;">
             <div class="example-handle" cdkDragHandle style="border: 1px solid red;">
@@ -9,6 +9,6 @@
             </div>
         </div>
 
-        <div ctrl-factory [componentName]="comp.name" [attributes]="comp.attributes"></div>
+        <div ctrl-factory [componentType]="comp.type" [attributes]="comp.attributes"></div>
     </div>
 </div>

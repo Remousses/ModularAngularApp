@@ -23,9 +23,7 @@ public class Attribute {
 
 	private String value;
 
-	@ManyToOne
-	@JoinColumn(name = "attributeTypeId")
-	private AttributeType attributeType;
+	private String type;
 
 	@ManyToOne
 	@JoinColumn(name = "customComponentId")
