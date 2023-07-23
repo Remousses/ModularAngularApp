@@ -19,6 +19,7 @@
 		<lombok.version>1.18.28</lombok.version>
 		<mysql-connector-java.version>8.0.30</mysql-connector-java.version>
 		<hypersistence-utils.version>3.5.0</hypersistence-utils.version>
+		<modelmapper.version>3.1.1</modelmapper.version>
     </properties>
 
     <dependencies>
@@ -41,11 +42,15 @@
             <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
-
 		<dependency>
 			<groupId>io.hypersistence</groupId>
 			<artifactId>hypersistence-utils-hibernate-62</artifactId>
 			<version>${hypersistence-utils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${modelmapper.version}</version>
 		</dependency>
     </dependencies>
     

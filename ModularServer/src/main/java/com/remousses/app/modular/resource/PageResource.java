@@ -1,6 +1,6 @@
 package com.remousses.app.modular.resource;
 
-import com.remousses.app.modular.model.entity.Page;
+import com.remousses.app.modular.model.dto.PageDto;
 import com.remousses.app.modular.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +22,12 @@ public class PageResource {
 	}
 
 	@GetMapping
-	public List<Page> getPages() {
+	public List<PageDto> getPages() {
 		return pageService.getPages();
 	}
 
 	@GetMapping("{title}")
-	public Page getPageByTitle(@PathVariable String title) {
-		return pageService.getPageByTitle(title);
+	public PageDto getByTitle(@PathVariable String title) {
+		return pageService.getByTitle(title);
 	}
 }

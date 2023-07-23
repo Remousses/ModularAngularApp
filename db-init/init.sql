@@ -3,12 +3,14 @@ USE Modular_App;
 CREATE TABLE page (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(100),
+    url VARCHAR (200),
     PRIMARY KEY (id)
 );
 
-INSERT INTO page (title)
+INSERT INTO page (title, url)
 VALUES
-    ("First page");
+    ("home page", "home"),
+    ("First page", "first_page");
 
 CREATE TABLE custom_component (
     id INT NOT NULL AUTO_INCREMENT,
@@ -21,7 +23,7 @@ CREATE TABLE custom_component (
 );
 INSERT INTO custom_component (name, drop_point, type, page_id)
 VALUES
-    ("checkbox", '{"x": 20, "y": 30}', "Checkbox", 1);
+    ("checkbox", '{"x": 20, "y": 30}', "Checkbox", 2);
 
 CREATE TABLE attribute (
     id INT NOT NULL AUTO_INCREMENT,

@@ -1,4 +1,5 @@
 import { Attribute } from "./attribute.interface";
+import { Page } from "./page.interface";
 
 export interface CustomComponent {
     id?: number;
@@ -6,4 +7,5 @@ export interface CustomComponent {
     type: string;
     attributes?: Attribute[];
     dropPoint?: any;
+    page: Page;
 }

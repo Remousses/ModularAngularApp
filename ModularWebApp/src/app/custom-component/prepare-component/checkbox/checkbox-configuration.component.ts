@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
@@ -9,7 +9,7 @@ import { CustomComponent } from 'src/app/interface/component.interface';
   templateUrl: './checkbox-configuration.component.html',
   styleUrls: ['./checkbox-configuration.component.scss']
 })
-export class CheckboxConfigurationComponent implements OnInit, AfterViewInit  {
+export class CheckboxConfigurationComponent implements OnInit  {
   componentName = '';
   checked = false;
   indeterminate = false;
@@ -20,30 +20,17 @@ export class CheckboxConfigurationComponent implements OnInit, AfterViewInit  {
 
   ngOnInit() {}
 
-  ngAfterViewInit(): void {
-    // this.checked = this.checkbox.checked;
-  }
-
   save() {
     if (this.componentName) {
       const page = this.pageService.getCurrentPage();
       if (page.id) {
-        const component: CustomComponent = {
-          name: this.componentName,
-          type: 'Checkbox'
-        };
-        this.componentService.addComponent(page.id, component);
+        // const customComponent: CustomComponent = {
+        //   name: this.componentName,
+        //   type: 'Checkbox'
+        // };
+        // this.componentService.addComponent(page.id, customComponent);
       }
     }
   }
 
-  integrate() {
-    // const page = this.pageService.getCurrentPage();
-    // if (page.id) {
-    //   const component: CustomComponent = {
-    //     name: this.componentName
-    //   };
-    //   this.componentService.addComponent(page.id, component);
-    // }
-  }
 }

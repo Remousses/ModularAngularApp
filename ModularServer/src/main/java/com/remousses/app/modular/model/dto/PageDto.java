@@ -1,12 +1,17 @@
 package com.remousses.app.modular.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
 public class PageDto {
-	private String player1;
-	private String player2;
-	private int scorePlayer1;
+	private Integer id;
+	private String title;
+	private String url;
+	@JsonManagedReference
+	private List<CustomComponentDto> customComponents;
 }

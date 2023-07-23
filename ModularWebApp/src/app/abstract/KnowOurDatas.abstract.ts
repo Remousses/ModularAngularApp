@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { KnowOurDatasService } from "../service/know-our-datas.service";
 
 @Component({ template: '' })
@@ -8,7 +8,7 @@ export abstract class KnowOurDatasAbstract {
     load(datas: any) {
         let formatData = { ...datas };
         delete formatData.knowOurDatasService;
-        
+
         this.knowOurDatasService.load(formatData);
     }
 

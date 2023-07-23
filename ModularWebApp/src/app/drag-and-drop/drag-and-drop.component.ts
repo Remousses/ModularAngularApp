@@ -1,6 +1,9 @@
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { Page } from '../interface/page.interface';
+import { ActivatedRoute } from '@angular/router';
+import { ComponentService } from '../service/component.service';
+import { CustomComponent } from '../interface/component.interface';
 import { PageService } from '../service/page.service';
 
 @Component({
@@ -11,16 +14,19 @@ import { PageService } from '../service/page.service';
 export class DragAndDropComponent {
   page!: Page;
 
-  constructor(private pageService: PageService) {}
+  constructor(private activatedRoute: ActivatedRoute, private componentService: ComponentService, private pageService: PageService) {}
 
   ngOnInit() {
-    this.pageService.findCurrentPage("First page").subscribe(data => {this.page = data; 
-      console.log(this.page);});
-    
+    this.activatedRoute.data.subscribe((data: any) => {
+      this.page = data.page
+    });
   }
 
-  dragEnd(event: CdkDragEnd, componentId: number | undefined) {
-    console.log(event, componentId);
-    // this.pie = event.dropPoint;
+  dragEnd(event: CdkDragEnd, page: Page, customComponent: CustomComponent) {
+    customComponent.page = page;
+    customComponent.dropPoint = event.dropPoint;
+    this.componentService.save(customComponent).subscribe(data => {
+      this.pageService.updateSessionPageCustomComponents(page, data);
+    });
   }
 }

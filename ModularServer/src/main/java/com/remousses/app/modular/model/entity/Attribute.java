@@ -1,7 +1,6 @@
 package com.remousses.app.modular.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,8 +24,8 @@ public class Attribute {
 
 	private String type;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "customComponentId")
-	@JsonIgnore
 	private CustomComponent customComponent;
 }
