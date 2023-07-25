@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { HttpClientModule } from "@angular/common/http";
+import { ToastrModule, provideToastr } from 'ngx-toastr';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
@@ -17,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,12 +29,14 @@ import { CheckboxConfigurationComponent } from './custom-component/prepare-compo
 
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { CheckboxComponent } from './custom-component/checkbox/checkbox.component';
+import { PageComponent } from './page/page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DragAndDropComponent,
     ControlFactoryDirective,
+    DragAndDropComponent,
+    PageComponent,
     GlobalConfigurationComponent,
     CheckboxConfigurationComponent,
     CheckboxComponent
@@ -43,7 +47,9 @@ import { CheckboxComponent } from './custom-component/checkbox/checkbox.componen
     AppRoutingModule,
     NgxJsonViewerModule,
     HttpClientModule,
+    ToastrModule,
     FormsModule,
+    ReactiveFormsModule,
     DragDropModule,
     MatCardModule,
     MatCheckboxModule,
@@ -54,9 +60,13 @@ import { CheckboxComponent } from './custom-component/checkbox/checkbox.componen
     MatSelectModule,
     MatButtonModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ],
-  providers: [],
+  providers: [
+    provideAnimations(),
+    provideToastr()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
