@@ -20,6 +20,7 @@
 		<mysql-connector-java.version>8.0.30</mysql-connector-java.version>
 		<hypersistence-utils.version>3.5.0</hypersistence-utils.version>
 		<modelmapper.version>3.1.1</modelmapper.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
 
     <dependencies>
@@ -35,6 +36,11 @@
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>${mysql-connector-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
 		</dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
