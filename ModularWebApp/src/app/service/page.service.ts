@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Page } from "../interface/page.interface";
 import { HttpClient } from "@angular/common/http";
-import { UrlConstant } from "../util/constant/UrlConstant";
 import { Observable } from "rxjs";
+import { ToastrService } from "ngx-toastr";
+import { UrlConstant } from "../util/constant/UrlConstant";
+import { Page } from "../interface/page.interface";
 import { CustomComponent } from "../interface/component.interface";
 
 @Injectable({
@@ -12,15 +13,11 @@ export class PageService {
   private currentPage!: Page;
   private pages!: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   findCurrentPage(title:  string): Observable<Page> {
     return this.http.get<Page>(UrlConstant.pageUrl + title);
   }
-
-  // findCurrentPage(title:  string) {
-  //   this.http.get<Page>(UrlConstant.pageUrl + title).subscribe(data => this.currentPage);
-  // }
 
   getPages(): Observable<Page[]> {
     return this.http.get<Page[]>(UrlConstant.pageUrl);
@@ -61,8 +58,23 @@ export class PageService {
       }
     }
 
-    this.clearLoadedPages();
-    this.setLoadedPages(this.pages);
+    this.updateSessionPages();
     return page;
+  }
+
+  updateSessionPages() {
+    // this.clearLoadedPages();
+    this.setLoadedPages(this.pages);
+  }
+
+  save(page:  Page): void {
+    this.http.post<Page>(UrlConstant.pageUrl, page).subscribe({
+      next: (data) => {
+        this.pages.push(data);
+        this.updateSessionPages();
+        this.toastr.success('The ' + data.title + 'page has been successfully created!');
+      },
+      error: (err) => this.toastr.error(err.error.error, 'Your page has not been created!')
+    });
   }
 }

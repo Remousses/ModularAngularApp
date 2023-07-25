@@ -3,7 +3,11 @@
     <mat-card-content>
 
         <button mat-button (click)="showDatas()">Display all datas</button>
-        <ngx-json-viewer *ngIf="allDatas" [json]="allDatas" [expanded]="false"></ngx-json-viewer>
+        <ngx-json-viewer *ngIf="isShowDatas && allDatas" [json]="allDatas" [expanded]="false"></ngx-json-viewer>
+        <br><br>
+
+        <app-page></app-page>
+
         <br><br>
 
         <app-checkbox-configuration></app-checkbox-configuration>

@@ -8,10 +8,15 @@ import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
 })
 export class GlobalConfigurationComponent extends KnowOurDatasAbstract implements OnInit {
   allDatas: any[] = [];
+  isShowDatas = false;
 
   ngOnInit() {}
 
   showDatas() {
-    this.allDatas = this.displayDatas();
+    this.isShowDatas = !this.isShowDatas
+
+    if (this.isShowDatas) {
+      this.allDatas = this.displayDatas();
+    }
   }
 }

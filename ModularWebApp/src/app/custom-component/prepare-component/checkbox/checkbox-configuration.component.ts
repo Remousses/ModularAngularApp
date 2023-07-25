@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
-import { CustomComponent } from 'src/app/interface/component.interface';
 
 @Component({
   selector: 'app-checkbox-configuration',

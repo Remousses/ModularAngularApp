@@ -11,4 +11,8 @@ public interface PageService {
     PageDto getById(Integer id);
 
     PageDto getByTitle(String title);
+
+    PageDto save(PageDto pageDto);
+
+    void deleteByTitle(String title);
 }
