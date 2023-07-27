@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CheckboxComponent } from '../../checkbox/checkbox.component';
+import { CheckboxComponent } from '../../prepare-component/checkbox/checkbox.component';
 import { PageService } from 'src/app/service/page.service';
 import { ComponentService } from 'src/app/service/component.service';
 

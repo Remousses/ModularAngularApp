@@ -24,11 +24,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ControlFactoryDirective } from './directive/control-factory.directive';
 
-import { GlobalConfigurationComponent } from './custom-component/prepare-component/global-configuration.component';
-import { CheckboxConfigurationComponent } from './custom-component/prepare-component/checkbox/checkbox-configuration.component';
+import { GlobalConfigurationComponent } from './custom-component/configuration/global-configuration.component';
+import { CheckboxConfigurationComponent } from './custom-component/configuration/checkbox/checkbox-configuration.component';
 
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
-import { CheckboxComponent } from './custom-component/checkbox/checkbox.component';
+import { CheckboxComponent } from './custom-component/prepare-component/checkbox/checkbox.component';
 import { PageComponent } from './page/page.component';
 
 @NgModule({

@@ -5,7 +5,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 
-import { CheckboxComponent } from '../custom-component/checkbox/checkbox.component';
+import { CheckboxComponent } from '../custom-component/prepare-component/checkbox/checkbox.component';
 import { Attribute } from '../interface/attribute.interface';
 
 
@@ -13,7 +13,7 @@ import { Attribute } from '../interface/attribute.interface';
     selector: '[ctrl-factory]'
 })
 export class ControlFactoryDirective implements OnChanges {
-    static readonly TYPE_MAP: any = {
+    private static readonly TYPE_MAP: any = {
         'Checkbox': CheckboxComponent
     };
     @Input() componentType = '';
