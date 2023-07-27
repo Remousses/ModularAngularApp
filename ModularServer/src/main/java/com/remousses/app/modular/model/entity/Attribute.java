@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,12 +19,15 @@ public class Attribute {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	private String name;
+
+	@NotNull
+	private String type;
 
 	private String value;
 
-	private String type;
-
+	@NotNull
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "customComponentId")

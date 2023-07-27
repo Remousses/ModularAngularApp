@@ -9,8 +9,8 @@ import lombok.Setter;
 public class AttributeDto {
 	private Integer id;
 	private String name;
-	private String value;
 	private String type;
+	private String value;
 	@JsonBackReference
 	private CustomComponentDto customComponent;
 }

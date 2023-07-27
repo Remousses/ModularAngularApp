@@ -2,8 +2,8 @@ USE Modular_App;
 
 CREATE TABLE page (
     id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(100),
-    url VARCHAR (200),
+    title VARCHAR(100) NOT NULL,
+    url VARCHAR (200) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -14,8 +14,8 @@ VALUES
 
 CREATE TABLE custom_component (
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100),
-    type VARCHAR(100),
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(100) NOT NULL,
     drop_point JSON,
     page_id INT NOT NULL,
     PRIMARY KEY (id),
@@ -23,18 +23,21 @@ CREATE TABLE custom_component (
 );
 INSERT INTO custom_component (name, drop_point, type, page_id)
 VALUES
+    ("home table", '{"x": 20, "y": 30}', "Table", 1),
     ("checkbox", '{"x": 20, "y": 30}', "Checkbox", 2);
 
 CREATE TABLE attribute (
     id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100),
-    value VARCHAR(100),
-    type VARCHAR(100),
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    value TEXT,
     custom_component_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (custom_component_id) REFERENCES custom_component(id)
 );
-INSERT INTO attribute (name, value, type, custom_component_id)
-VALUES 
-	("checked", "true", "Boolean", 1),
-    ("indeterminate", "false", "Boolean", 1);
+INSERT INTO attribute (name, type, value, custom_component_id)
+VALUES
+    ("displayedColumns","Array", "[\"position\", \"name\", \"weight\", \"symbol\"]", 1),
+    ("dataSource", "Array", "[{\"position\":1,\"name\":\"Hydrogen\",\"weight\":1.0079,\"symbol\":\"H\"},{\"position\":2,\"name\":\"Helium\",\"weight\":4.0026,\"symbol\":\"He\"}]", 1),
+	("checked", "true", "Boolean", 2),
+    ("indeterminate", "false", "Boolean", 2);

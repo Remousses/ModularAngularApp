@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,18 +25,21 @@ public class CustomComponent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	private String name;
+
+	@NotNull
+	private String type;
 
 	@Column(name = "drop_point")
 	private JsonNode dropPoint;
 
-	private String type;
-
-	@OneToMany(mappedBy = "customComponent", orphanRemoval = true, cascade= CascadeType.ALL)
-	private List<Attribute> attributes;
-
+	@NotNull
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "pageId")
 	private Page page;
+
+	@OneToMany(mappedBy = "customComponent", orphanRemoval = true, cascade= CascadeType.ALL)
+	private List<Attribute> attributes;
 }
