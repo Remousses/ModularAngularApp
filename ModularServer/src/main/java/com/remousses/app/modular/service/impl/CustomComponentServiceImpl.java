@@ -1,5 +1,6 @@
 package com.remousses.app.modular.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.remousses.app.modular.component.ModelMapperCustomize;
 import com.remousses.app.modular.model.dto.CustomComponentDto;
 import com.remousses.app.modular.model.entity.CustomComponent;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class CustomComponentServiceImpl implements CustomComponentService {
     @Autowired
@@ -17,9 +20,23 @@ public class CustomComponentServiceImpl implements CustomComponentService {
     @Autowired
     ModelMapperCustomize modelMapperCustomize;
 
+    @Override
     @Transactional
     public CustomComponentDto save(CustomComponentDto customComponentDto) {
         final CustomComponent customComponent = modelMapperCustomize.map(customComponentDto, CustomComponent.class);
         return modelMapperCustomize.map(customComponentRepository.save(customComponent), CustomComponentDto.class);
+    }
+
+    @Override
+    @Transactional
+    public CustomComponentDto savePosition(Integer id, JsonNode dropPoint) {
+        final Optional<CustomComponent> customComponentOpt = customComponentRepository.findById(id);
+
+        if (customComponentOpt.isPresent()) {
+            customComponentOpt.get().setDropPoint(dropPoint);
+            return modelMapperCustomize.map(customComponentRepository.save(customComponentOpt.get()), CustomComponentDto.class);
+        }
+
+        return null;
     }
 }

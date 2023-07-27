@@ -45,6 +45,9 @@ export class ControlFactoryDirective implements OnChanges {
                     case 'Float':
                         attr.value = parseFloat(attr.value);
                         break;
+                    case 'Array':
+                        attr.value = JSON.parse(attr.value);
+                        break;
                 }
                 compRef.setInput(attr.name, attr.value)
             });

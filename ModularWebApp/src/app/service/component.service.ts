@@ -16,9 +16,13 @@ export class ComponentService {
     }
 
     save(customComponent: CustomComponent): Observable<CustomComponent> {
-         const clone = structuredClone(customComponent);
-         this.avoidCircularError(clone);
-        return this.http.post<CustomComponent>(UrlConstant.componentUrl, clone)
+        const clone = structuredClone(customComponent);
+        this.avoidCircularError(clone);
+        return this.http.post<CustomComponent>(UrlConstant.componentUrl, clone);
+    }
+
+    savePosition(id: Number, dropPoint: any): Observable<CustomComponent> {
+        return this.http.post<CustomComponent>(UrlConstant.componentUrl + id, dropPoint);
     }
 
     private avoidCircularError(customComponent: CustomComponent) {

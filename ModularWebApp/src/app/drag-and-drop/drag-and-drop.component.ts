@@ -23,10 +23,10 @@ export class DragAndDropComponent {
   }
 
   dragEnd(event: CdkDragEnd, page: Page, customComponent: CustomComponent) {
-    customComponent.page = page;
-    customComponent.dropPoint = event.dropPoint;
-    this.componentService.save(customComponent).subscribe(data => {
-      this.pageService.updateSessionPageCustomComponents(page, data);
-    });
+    if (customComponent.id) {
+      this.componentService.savePosition(customComponent.id, event.dropPoint).subscribe(data => {
+        this.pageService.updateSessionPageCustomComponents(page, data);
+      });
+    }
   }
 }
