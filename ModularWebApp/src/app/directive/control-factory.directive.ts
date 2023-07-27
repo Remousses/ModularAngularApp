@@ -5,8 +5,10 @@ import {
     ViewContainerRef
 } from '@angular/core';
 
-import { CheckboxComponent } from '../custom-component/prepare-component/checkbox/checkbox.component';
 import { Attribute } from '../interface/attribute.interface';
+
+import { CheckboxComponent } from '../custom-component/prepare-component/checkbox/checkbox.component';
+import { TableComponent } from '../custom-component/prepare-component/table/table.component';
 
 
 @Directive({
@@ -14,7 +16,8 @@ import { Attribute } from '../interface/attribute.interface';
 })
 export class ControlFactoryDirective implements OnChanges {
     private static readonly TYPE_MAP: any = {
-        'Checkbox': CheckboxComponent
+        'Checkbox': CheckboxComponent,
+        'Table': TableComponent
     };
     @Input() componentType = '';
     @Input() attributes: Attribute[] | undefined = [];

@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,20 +27,25 @@ import { ControlFactoryDirective } from './directive/control-factory.directive';
 
 import { GlobalConfigurationComponent } from './custom-component/configuration/global-configuration.component';
 import { CheckboxConfigurationComponent } from './custom-component/configuration/checkbox/checkbox-configuration.component';
+import { TableConfigurationComponent } from './custom-component/configuration/table/table-configuration.component';
+
+import { CheckboxComponent } from './custom-component/prepare-component/checkbox/checkbox.component';
+import { TableComponent } from './custom-component/prepare-component/table/table.component';
 
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
-import { CheckboxComponent } from './custom-component/prepare-component/checkbox/checkbox.component';
 import { PageComponent } from './page/page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ControlFactoryDirective,
-    DragAndDropComponent,
-    PageComponent,
     GlobalConfigurationComponent,
     CheckboxConfigurationComponent,
-    CheckboxComponent
+    TableConfigurationComponent,
+    DragAndDropComponent,
+    PageComponent,
+    CheckboxComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,8 @@ import { PageComponent } from './page/page.component';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule
   ],
   providers: [
     provideAnimations(),
