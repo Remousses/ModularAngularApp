@@ -1,10 +1,10 @@
 package com.remousses.app.modular.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.remousses.app.modular.component.ModelMapperCustomize;
 import com.remousses.app.modular.model.dto.CustomComponentDto;
 import com.remousses.app.modular.model.entity.CustomComponent;
 import com.remousses.app.modular.repository.CustomComponentRepository;
+import com.remousses.app.modular.service.AbstractQueryBuilderService;
 import com.remousses.app.modular.service.CustomComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 @Service
-public class CustomComponentServiceImpl implements CustomComponentService {
+public class CustomComponentServiceImpl extends AbstractQueryBuilderService<CustomComponentRepository> implements CustomComponentService {
     @Autowired
     CustomComponentRepository customComponentRepository;
-
-    @Autowired
-    ModelMapperCustomize modelMapperCustomize;
 
     @Override
     @Transactional

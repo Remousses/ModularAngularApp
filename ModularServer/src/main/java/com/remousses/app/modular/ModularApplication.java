@@ -18,6 +18,7 @@ public class ModularApplication {
 		SpringApplication.run(ModularApplication.class, args);
 	}
 
+	@SuppressWarnings("unused")
 	@Bean
 	public ModelMapperCustomize modelMapper() {
 		return new ModelMapperCustomize();

@@ -8,8 +8,6 @@ public interface PageService {
 
     List<PageDto> getPages();
 
-    PageDto getById(Integer id);
-
     PageDto getByTitle(String title);
 
     PageDto save(PageDto pageDto);

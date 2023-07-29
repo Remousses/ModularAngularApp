@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,5 +14,10 @@ public class PageDto {
 	private String title;
 	private String url;
 	@JsonManagedReference
-	private List<CustomComponentDto> customComponents;
+	private List<CustomComponentDto> customComponents = new ArrayList<>();
+
+	@SuppressWarnings("unused")
+	public void addCustomComponent(CustomComponentDto customComponent) {
+		this.customComponents.add(customComponent);
+	}
 }

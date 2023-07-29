@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/pages/")
-public class PageResource {
-	@Autowired
-	PageService pageService;
+public class PageResource extends AbstractQueryBuilderResource<PageDto, PageService> {
+
+	protected PageResource() {
+		super(PageDto.class);
+	}
 
 	@GetMapping(value = "ping")
 	public String ping() {
@@ -26,21 +29,21 @@ public class PageResource {
 
 	@GetMapping
 	public List<PageDto> getPages() {
-		return pageService.getPages();
+		return this.getService().getPages();
 	}
 
 	@GetMapping("{title}")
 	public PageDto getByTitle(@PathVariable String title) {
-		return pageService.getByTitle(title);
+		return this.getService().getByTitle(title);
 	}
 
 	@PostMapping
 	public PageDto save(@RequestBody PageDto pageDto) {
-		return pageService.save(pageDto);
+		return this.getService().save(pageDto);
 	}
 
 	@DeleteMapping("{title}")
 	public void deleteByTitle(@PathVariable String title) {
-		pageService.deleteByTitle(title);
+		this.getService().deleteByTitle(title);
 	}
 }

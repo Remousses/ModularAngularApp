@@ -1,9 +1,9 @@
 package com.remousses.app.modular.service.impl;
 
-import com.remousses.app.modular.component.ModelMapperCustomize;
 import com.remousses.app.modular.model.dto.PageDto;
 import com.remousses.app.modular.model.entity.Page;
 import com.remousses.app.modular.repository.PageRepository;
+import com.remousses.app.modular.service.AbstractQueryBuilderService;
 import com.remousses.app.modular.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @Service
-public class PageServiceImpl implements PageService {
-    @Autowired
-    PageRepository pageRepository;
+public class PageServiceImpl extends AbstractQueryBuilderService<PageRepository> implements PageService {
 
     @Autowired
-    ModelMapperCustomize modelMapperCustomize;
+    PageRepository pageRepository;
 
     @Transactional(readOnly = true)
     public List<PageDto> getPages() {
