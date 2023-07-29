@@ -24,6 +24,7 @@ CREATE TABLE custom_component (
 INSERT INTO custom_component (name, drop_point, type, page_id)
 VALUES
     ("home table", '{"x": 20, "y": 30}', "Table", 1),
+    ("home table", '{"x": 100, "y": 30}', "Checkbox", 1),
     ("checkbox", '{"x": 20, "y": 30}', "Checkbox", 2);
 
 CREATE TABLE attribute (
