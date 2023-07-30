@@ -2,9 +2,7 @@ package com.remousses.app.modular.resource;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.remousses.app.modular.model.dto.CustomComponentDto;
-import com.remousses.app.modular.model.dto.PageDto;
 import com.remousses.app.modular.service.CustomComponentService;
-import com.remousses.app.modular.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

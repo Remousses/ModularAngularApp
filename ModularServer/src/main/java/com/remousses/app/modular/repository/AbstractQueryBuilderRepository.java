@@ -18,7 +18,7 @@ public abstract class AbstractQueryBuilderRepository {
         var tupleQuery = cb.createTupleQuery();
         Root<T> root = tupleQuery.from(clazz);
 
-        // root.get("fieldName") allow to build selected field
+        // root.get("fieldName") allows to build selected field
         var select = columns.stream().map(root::get).toArray(Path[]::new);
 
         tupleQuery.multiselect(select);
