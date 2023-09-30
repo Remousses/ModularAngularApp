@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
+import { PageService } from 'src/app/service/page.service';
 
 @Component({
   selector: 'app-global-configuration',
@@ -7,6 +8,9 @@ import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
   styleUrls: ['./global-configuration.component.scss']
 })
 export class GlobalConfigurationComponent extends KnowOurDatasAbstract implements OnInit {
+
+  pageService = inject(PageService);
+
   allDatas: any[] = [];
   isShowDatas = false;
 

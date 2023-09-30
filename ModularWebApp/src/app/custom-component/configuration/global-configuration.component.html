@@ -2,6 +2,8 @@
     <mat-card-header>Configuration</mat-card-header>
     <mat-card-content>
 
+        <button mat-button (click)="pageService.clearLoadedPages()">Clear cache</button>
+        <br><br>
         <button mat-button (click)="showDatas()">Display all datas</button>
         <ngx-json-viewer *ngIf="isShowDatas && allDatas" [json]="allDatas" [expanded]="false"></ngx-json-viewer>
         <br><br>
