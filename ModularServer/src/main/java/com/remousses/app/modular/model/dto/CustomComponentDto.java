@@ -28,14 +28,14 @@ public class CustomComponentDto {
 
 	//======== WARNING : both setDropPoint methods are required, they must keep this declaration order ========//
 
-	/**
-	 * Required for conversion when used in {@link com.remousses.app.modular.service.AbstractQueryBuilderService}
-	 * @param dropPoint
-	 */
-	@SuppressWarnings("unused")
-	public void setDropPoint(ObjectNode dropPoint) {
-		this.dropPoint = dropPoint;
-	}
+//	/**
+//	 * Required for conversion when used in {@link com.remousses.app.modular.service.AbstractQueryBuilderService}
+//	 * @param dropPoint
+//	 */
+//	@SuppressWarnings("unused")
+//	public void setDropPoint(ObjectNode dropPoint) {
+//		this.dropPoint = dropPoint;
+//	}
 
 	/**
 	 * Required for conversion with {@link com.remousses.app.modular.component.ModelMapperCustomize}
