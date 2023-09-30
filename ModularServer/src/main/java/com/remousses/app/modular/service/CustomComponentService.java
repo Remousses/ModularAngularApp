@@ -8,4 +8,6 @@ public interface CustomComponentService {
     CustomComponentDto save(CustomComponentDto customComponentDto);
 
     CustomComponentDto savePosition(Integer id, JsonNode dropPoint);
+
+    void deleteById(Integer id);
 }

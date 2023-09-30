@@ -37,4 +37,10 @@ public class CustomComponentServiceImpl extends AbstractQueryBuilderService<Cust
 
         return null;
     }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+        customComponentRepository.deleteById(id);
+    }
 }

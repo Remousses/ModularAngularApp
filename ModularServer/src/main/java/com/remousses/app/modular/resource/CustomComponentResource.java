@@ -5,6 +5,7 @@ import com.remousses.app.modular.model.dto.CustomComponentDto;
 import com.remousses.app.modular.service.CustomComponentService;
 import com.remousses.app.modular.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,10 +23,10 @@ public class CustomComponentResource extends AbstractQueryBuilderResource<Custom
 		super(CustomComponentDto.class);
 	}
 
-	@PostMapping
-	public CustomComponentDto save(@RequestBody CustomComponentDto customComponentDto) {
-		return this.getService().save(customComponentDto);
-	}
+//	@PostMapping
+//	public CustomComponentDto save(@RequestBody CustomComponentDto customComponentDto) {
+//		return this.getService().save(customComponentDto);
+//	}
 
 	@PostMapping("{id}")
 	public CustomComponentDto save(@PathVariable Integer id, @RequestBody JsonNode dropPoint) {
@@ -36,5 +37,10 @@ public class CustomComponentResource extends AbstractQueryBuilderResource<Custom
 	public CustomComponentDto add(@PathVariable Integer pageId, @RequestBody CustomComponentDto customComponentDto) {
 		customComponentDto.setPage(pageService.getById(pageId));
 		return this.getService().save(customComponentDto);
+	}
+
+	@DeleteMapping("{id}")
+	public void deleteById(@PathVariable Integer id) {
+		this.getService().deleteById(id);
 	}
 }
