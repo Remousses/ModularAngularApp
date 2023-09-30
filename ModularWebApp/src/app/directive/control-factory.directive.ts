@@ -8,8 +8,7 @@ import {
 
 import { Attribute } from '../interface/attribute.interface';
 
-import { CheckboxComponent } from '../custom-component/prepare-component/checkbox/checkbox.component';
-import { TableComponent } from '../custom-component/prepare-component/table/table.component';
+import { ComponentType } from '../util/constant/ComponentType';
 
 
 @Directive({
@@ -18,20 +17,17 @@ import { TableComponent } from '../custom-component/prepare-component/table/tabl
 export class ControlFactoryDirective implements OnChanges {
 
     private container = inject(ViewContainerRef);
-    private static readonly TYPE_MAP: any = {
-        'Checkbox': CheckboxComponent,
-        'Table': TableComponent
-    };
+
     @Input() componentType = '';
     @Input() attributes: Attribute[] | undefined = [];
 
     ngOnChanges() {
         if (!this.componentType) return;
-        if(!ControlFactoryDirective.TYPE_MAP[this.componentType]) {
+        if(!ComponentType.TYPE_MAP[this.componentType]) {
             throw new Error(`No class defined in TYPE_MAP for '${this.componentType}'`);
         }
         
-        const compRef = this.container.createComponent(ControlFactoryDirective.TYPE_MAP[this.componentType]);
+        const compRef = this.container.createComponent(ComponentType.TYPE_MAP[this.componentType]);
         
         if (this.attributes) {
             this.attributes.forEach(attr => {
