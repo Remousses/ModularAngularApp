@@ -25,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ControlFactoryDirective } from './directive/control-factory.directive';
 
+import { ComponentNameComponent } from './custom-component/configuration/component-name/component-name.component';
 import { GlobalConfigurationComponent } from './custom-component/configuration/global-configuration.component';
 import { CheckboxConfigurationComponent } from './custom-component/configuration/checkbox/checkbox-configuration.component';
 import { TableConfigurationComponent } from './custom-component/configuration/table/table-configuration.component';
@@ -39,6 +40,7 @@ import { PageComponent } from './page/page.component';
   declarations: [
     AppComponent,
     ControlFactoryDirective,
+    ComponentNameComponent,
     GlobalConfigurationComponent,
     CheckboxConfigurationComponent,
     TableConfigurationComponent,

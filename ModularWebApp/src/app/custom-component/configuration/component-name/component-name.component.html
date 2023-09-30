@@ -1,0 +1,5 @@
+<br><br>
+<mat-form-field>
+    <mat-label>Component name</mat-label>
+    <input #componentNameInput matInput type="text" (keyup)="addComponentName(componentNameInput.value)" [(ngModel)]="componentName">
+</mat-form-field>
