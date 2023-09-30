@@ -38,7 +38,7 @@ CREATE TABLE attribute (
 );
 INSERT INTO attribute (name, type, value, custom_component_id)
 VALUES
-    ("displayedColumns","Array", "[\"position\", \"name\", \"weight\", \"symbol\"]", 1),
-    ("dataSource", "Array", "[{\"position\":1,\"name\":\"Hydrogen\",\"weight\":1.0079,\"symbol\":\"H\"},{\"position\":2,\"name\":\"Helium\",\"weight\":4.0026,\"symbol\":\"He\"}]", 1),
-	("checked", "true", "Boolean", 2),
-    ("indeterminate", "false", "Boolean", 2);
+    ("displayedColumnsUrl", "String","http://localhost:8082/api/v1/api-mock/table/columns", 1),
+    ("datasUrl", "String", "http://localhost:8082/api/v1/api-mock/table/datas", 1),
+	("checked", "Boolean", "true", 2),
+    ("indeterminate", "Boolean", "false", 2);
