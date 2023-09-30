@@ -13,7 +13,7 @@ export class SettingsService {
     private injector = inject(Injector);
     private pageService = inject(PageService);
 
-    routes: any[] = [
+    private routes: any[] = [
         {
             path: '/', redirectTo: '/home', pathMatch: 'full'
         }

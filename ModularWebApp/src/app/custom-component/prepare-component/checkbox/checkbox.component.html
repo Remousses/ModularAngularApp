@@ -3,8 +3,8 @@
         <h2>Checkbox configuration</h2>
 
         <section>
-            <!-- <mat-checkbox [(ngModel)]="checked">Checked</mat-checkbox>
-            <mat-checkbox [(ngModel)]="indeterminate">Indeterminate</mat-checkbox> -->
+            <mat-checkbox (change)="checkedChange.emit(checked)" [(ngModel)]="checked">Checked</mat-checkbox>
+            <mat-checkbox (change)="indeterminateChange.emit(indeterminate)" [(ngModel)]="indeterminate">Indeterminate</mat-checkbox>
         </section>
     </mat-card-content>
 </mat-card>

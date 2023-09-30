@@ -1,17 +1,7 @@
-import { Component } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' }
-];
+import { Component, inject } from '@angular/core';
+import { Attribute } from 'src/app/interface/attribute.interface';
+import { ComponentService } from 'src/app/service/component.service';
+import { ComponentType } from 'src/app/util/constant/ComponentType';
 
 @Component({
   selector: 'app-table-configuration',
@@ -19,6 +9,31 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./table-configuration.component.scss']
 })
 export class TableConfigurationComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+
+  private componentService = inject(ComponentService);
+
+  componentName = '';
+  displayedColumnsUrl: string = 'http://localhost:8082/api/v1/api-mock/table/columns';
+  datasUrl: string = 'http://localhost:8082/api/v1/api-mock/table/datas';
+  loadData = false;
+
+  addComponentName(value: string) {
+    this.componentName = value;
+  }
+
+  addComponent() {
+    const attributes: Attribute[] = [
+      {
+        name: 'displayedColumnsUrl',
+        type: 'String',
+        value: this.displayedColumnsUrl
+      },
+      {
+        name: 'datasUrl',
+        type: 'String',
+        value: this.datasUrl
+      }
+    ];
+    this.componentService.add(this.componentName, ComponentType.TABLE, attributes);
+  }
 }

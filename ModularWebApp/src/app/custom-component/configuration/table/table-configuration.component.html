@@ -1,3 +1,19 @@
 Table configuration
+<app-component-name (componentNameChange)="addComponentName($event)"></app-component-name>
+
 <br><br>
-<app-table [displayedColumns]="displayedColumns" [dataSource]="dataSource"></app-table>
+<mat-form-field>
+    <mat-label>Columns url</mat-label>
+    <input matInput type="text" [(ngModel)]="displayedColumnsUrl">
+</mat-form-field>
+<br><br>
+<mat-form-field>
+    <mat-label>Data url</mat-label>
+    <input matInput type="text" [(ngModel)]="datasUrl">
+</mat-form-field>
+
+<br><br>
+<app-table *ngIf="loadData" [displayedColumnsUrl]="displayedColumnsUrl" [datasUrl]="datasUrl"></app-table>
+
+<button *ngIf="!loadData" mat-button (click)="loadData = true">Preview</button>
+<button *ngIf="loadData" mat-button (click)="addComponent()">Add component</button>

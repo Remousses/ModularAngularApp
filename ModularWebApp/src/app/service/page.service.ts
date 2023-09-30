@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { UrlConstant } from "../util/constant/UrlConstant";
 import { Page } from "../interface/page.interface";
 import { CustomComponent } from "../interface/component.interface";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class PageService {
   
   private http = inject(HttpClient);
   private toastr = inject(ToastrService);
-  private currentPage!: Page;
-  private pages!: any;
+  private router = inject(Router);
 
+  private pages!: any;
 
   findCurrentPage(title:  string): Observable<Page> {
     return this.http.get<Page>(UrlConstant.pageUrl + title);
@@ -44,11 +45,17 @@ export class PageService {
     sessionStorage.removeItem('pages');
   }
 
-  getCurrentPage() {
-    return this.currentPage;
+  setCurrentPage(pageId: number) {
+    // if (pageId) {
+    //   this.currentPage = this.pages.find((page: Page) => pageId === page.id);
+    // }
   }
 
-  updateSessionPageCustomComponents(page: Page, customComponent: CustomComponent) {
+  getCurrentPage(): Page {
+    return this.pages.find((page: Page) => page.url === this.router.url.substring(1));
+  }
+
+  updateSessionPageCustomComponents(page: Page, customComponent: CustomComponent): Page {
     for (let i = 0; i < this.pages.length; i++) {
       if (this.pages[i].id === page.id) {
         for (let j = 0; j < this.pages[i].customComponents?.length; j++) {
@@ -65,7 +72,6 @@ export class PageService {
   }
 
   updateSessionPages() {
-    // this.clearLoadedPages();
     this.setLoadedPages(this.pages);
   }
 

@@ -5,5 +5,5 @@ export interface Attribute {
     name: string;
     type: string;
     value: any;
-    customComponent: CustomComponent;
+    customComponent?: CustomComponent;
 }

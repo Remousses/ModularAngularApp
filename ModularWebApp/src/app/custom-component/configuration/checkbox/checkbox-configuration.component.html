@@ -1,9 +1,5 @@
 Checkbox configuration
-<br><br>
-<mat-form-field>
-    <mat-label>Component name</mat-label>
-    <input matInput type="text" [(ngModel)]="componentName">
-</mat-form-field>
+<app-component-name (componentNameChange)="addComponentName($event)"></app-component-name>
 
-<app-checkbox></app-checkbox>
-<button mat-button (click)="save()">Save</button>
+<app-checkbox [(checked)]="checked" [(indeterminate)]="indeterminate"></app-checkbox>
+<button mat-button (click)="addComponent()">Add component</button>

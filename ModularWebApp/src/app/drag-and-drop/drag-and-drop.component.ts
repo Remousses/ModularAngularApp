@@ -25,15 +25,6 @@ export class DragAndDropComponent {
   }
 
   dragEnd(event: CdkDragEnd, page: Page, customComponent: CustomComponent) {
-    // const test = {
-    //   x: event.dropPoint.x,
-    //   y: event.dropPoint.y
-    // }
-    // console.log('event before', test);
-    // event.dropPoint.x -= 81.75;
-    // event.dropPoint.y -= 14.75;
-    // console.log('event after', event.dropPoint);
-    
     if (customComponent.id) {
       this.componentService.savePosition(customComponent.id, event.dropPoint).subscribe(data => {
         this.pageService.updateSessionPageCustomComponents(page, data);

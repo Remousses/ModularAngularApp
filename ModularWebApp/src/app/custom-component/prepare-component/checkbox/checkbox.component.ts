@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
 
 @Component({
@@ -7,8 +7,11 @@ import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
   styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent extends KnowOurDatasAbstract implements OnInit {
-  @Input() checked = false;
-  @Input() indeterminate = false;
+  @Input({ required: true }) checked = false;
+  @Input({ required: true }) indeterminate = false;
+
+  @Output() checkedChange = new EventEmitter<boolean>();
+  @Output() indeterminateChange = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.load(this);

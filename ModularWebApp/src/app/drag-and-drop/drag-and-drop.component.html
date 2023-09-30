@@ -1,4 +1,5 @@
 <div *ngIf="page">
+    <!-- TODO: A small position error after a refresh, I think it's due to the position of the button. See to put it in each customize component and see what it gives  -->
     <div *ngFor="let comp of page.customComponents" cdkDrag [cdkDragFreeDragPosition]="comp.dropPoint" (cdkDragEnded)="dragEnd($event, page, comp)">
         <div class="drag-button" cdkDragHandle>
             <svg width="24px" fill="currentColor" viewBox="0 0 24 24">

@@ -8,6 +8,8 @@ export abstract class KnowOurDatasAbstract {
     load(datas: any) {
         let formatData = { ...datas };
         delete formatData.knowOurDatasService;
+        delete formatData.apiService;
+        delete formatData.pageService;
 
         this.knowOurDatasService.load(formatData);
     }
