@@ -2,7 +2,8 @@ import {
     Directive,
     Input,
     OnChanges,
-    ViewContainerRef
+    ViewContainerRef,
+    inject
 } from '@angular/core';
 
 import { Attribute } from '../interface/attribute.interface';
@@ -15,15 +16,14 @@ import { TableComponent } from '../custom-component/prepare-component/table/tabl
     selector: '[ctrl-factory]'
 })
 export class ControlFactoryDirective implements OnChanges {
+
+    private container = inject(ViewContainerRef);
     private static readonly TYPE_MAP: any = {
         'Checkbox': CheckboxComponent,
         'Table': TableComponent
     };
     @Input() componentType = '';
     @Input() attributes: Attribute[] | undefined = [];
-
-    constructor(
-        private container: ViewContainerRef) { }
 
     ngOnChanges() {
         if (!this.componentType) return;

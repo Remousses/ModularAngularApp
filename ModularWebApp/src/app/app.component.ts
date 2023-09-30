@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { PageService } from './service/page.service';
 import { Page } from './interface/page.interface';
 
@@ -8,9 +8,9 @@ import { Page } from './interface/page.interface';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  private pageService = inject(PageService);
   pages: Page[] = []
   
-  constructor(private pageService: PageService) {}
 
   ngOnInit() {
     this.pages = this.pageService.getLoadedPages();

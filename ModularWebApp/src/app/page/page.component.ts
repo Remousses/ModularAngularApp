@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PageService } from '../service/page.service';
 import { Page } from '../interface/page.interface';
@@ -9,12 +9,13 @@ import { Page } from '../interface/page.interface';
   styleUrls: ['./page.component.scss']
 })
 export class PageComponent {
+  
+  private pageService = inject(PageService);
   pageForm = new FormGroup({
     title: new FormControl('', { nonNullable: true, validators: Validators.required }),
     url: new FormControl('', { nonNullable: true, validators: Validators.required })
   });
 
-  constructor(private pageService: PageService) { }
 
   savePage() {
     if (this.pageForm.valid) {

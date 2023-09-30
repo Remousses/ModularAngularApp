@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PageService } from './page.service';
@@ -10,10 +10,8 @@ import { Page } from '../interface/page.interface';
 })
 export class SettingsService {
 
-    constructor(
-        private injector: Injector,
-        private pageService: PageService
-    ) { }
+    private injector = inject(Injector);
+    private pageService = inject(PageService);
 
     routes: any[] = [
         {

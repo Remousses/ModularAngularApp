@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
@@ -10,10 +10,12 @@ import { CustomComponent } from "../interface/component.interface";
   providedIn: 'root'
 })
 export class PageService {
+  
+  private http = inject(HttpClient);
+  private toastr = inject(ToastrService);
   private currentPage!: Page;
   private pages!: any;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   findCurrentPage(title:  string): Observable<Page> {
     return this.http.get<Page>(UrlConstant.pageUrl + title);

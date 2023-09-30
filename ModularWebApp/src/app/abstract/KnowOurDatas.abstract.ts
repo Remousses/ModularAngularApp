@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { KnowOurDatasService } from "../service/know-our-datas.service";
 
 @Component({ template: '' })
 export abstract class KnowOurDatasAbstract {
-    constructor(private knowOurDatasService: KnowOurDatasService) {}
+    private knowOurDatasService = inject(KnowOurDatasService);
 
     load(datas: any) {
         let formatData = { ...datas };
