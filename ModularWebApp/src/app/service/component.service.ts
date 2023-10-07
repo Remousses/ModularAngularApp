@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { UrlConstant } from "../util/constant/UrlConstant";
 import { PageService } from "./page.service";
 import { Attribute } from "../interface/attribute.interface";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,7 @@ export class ComponentService {
 
     private http = inject(HttpClient);
     private pageService = inject(PageService);
+    private snackBar = inject(MatSnackBar);
 
     getComponent() {
         return null;
@@ -28,7 +30,7 @@ export class ComponentService {
         if (componentName) {
             const page = this.pageService.getCurrentPage();
             
-            if (page.id) {
+            if (page && page.id) {
                 const customComponent: CustomComponent = {
                     name: componentName,
                     type: componentType,
@@ -39,6 +41,8 @@ export class ComponentService {
                 const clone = structuredClone(customComponent);
                 this.http.post<CustomComponent>(UrlConstant.componentUrl + 'add/' + customComponent.page.id, clone)
                     .subscribe(data => this.pageService.updateSessionPageCustomComponents(page, data));
+            } else {
+                this.snackBar.open('Current page not stored in database', 'Close', { duration: 4000 });
             }
         }
     }

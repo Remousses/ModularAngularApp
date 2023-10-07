@@ -9,8 +9,8 @@ CREATE TABLE page (
 
 INSERT INTO page (title, url)
 VALUES
-    ("home page", "home"),
-    ("First page", "first_page");
+    ("First page", "first_page"),
+    ("Second page", "second_page");
 
 CREATE TABLE custom_component (
     id INT NOT NULL AUTO_INCREMENT,

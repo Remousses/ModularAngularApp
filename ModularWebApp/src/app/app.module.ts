@@ -33,6 +33,7 @@ import { TableConfigurationComponent } from './custom-component/configuration/ta
 import { CheckboxComponent } from './custom-component/prepare-component/checkbox/checkbox.component';
 import { TableComponent } from './custom-component/prepare-component/table/table.component';
 
+import { HomeComponent } from './home/home.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { PageComponent } from './page/page.component';
 
@@ -44,6 +45,7 @@ import { PageComponent } from './page/page.component';
     GlobalConfigurationComponent,
     CheckboxConfigurationComponent,
     TableConfigurationComponent,
+    HomeComponent,
     DragAndDropComponent,
     PageComponent,
     CheckboxComponent,

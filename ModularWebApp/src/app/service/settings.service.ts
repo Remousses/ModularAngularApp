@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PageService } from './page.service';
 import { DragAndDropComponent } from '../drag-and-drop/drag-and-drop.component';
 import { Page } from '../interface/page.interface';
+import { HomeComponent } from '../home/home.component';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,9 @@ export class SettingsService {
     private routes: any[] = [
         {
             path: '/', redirectTo: '/home', pathMatch: 'full'
+        },
+        {
+            path: 'home', component: HomeComponent
         }
     ];
 
