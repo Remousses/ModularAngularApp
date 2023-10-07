@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -72,7 +73,8 @@ import { PageComponent } from './page/page.component';
     MatSidenavModule,
     MatListModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [
     provideAnimations(),
