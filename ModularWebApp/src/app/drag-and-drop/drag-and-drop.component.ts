@@ -25,10 +25,7 @@ export class DragAndDropComponent {
   }
 
   dragEnd(event: any, page: Page, customComponent: CustomComponent, div: HTMLDivElement) {
-    console.log(event);
-    
     const dropPoint = this.retrieveXY(div.style.transform);
-    console.log(dropPoint);
     
     if (customComponent.id) {
       this.componentService.savePosition(customComponent.id, dropPoint).subscribe(data => {
@@ -41,9 +38,8 @@ export class DragAndDropComponent {
     const matches = [];
     let match;
     while ((match = this.XY_REGEX.exec(inputString)) !== null) {
-      matches.push(match[1]);
+      matches.push(Number(match[1]));
     }
-    console.log(matches);
     
     return {
       x: matches[0],
