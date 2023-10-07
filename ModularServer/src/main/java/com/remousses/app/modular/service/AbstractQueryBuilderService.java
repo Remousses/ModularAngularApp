@@ -22,6 +22,10 @@ public abstract class AbstractQueryBuilderService<R> {
     @Autowired
     protected ModelMapperCustomize modelMapperCustomize;
 
+    protected R getRepository()  {
+        return repository;
+    }
+
     /**
      * Allows to create custom query.
      * If you want a list then add method "addAttributeName" with one parameter with type of your attribute like PageDto.
