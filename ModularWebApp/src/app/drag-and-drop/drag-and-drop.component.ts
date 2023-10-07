@@ -1,4 +1,3 @@
-import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { Component, inject } from '@angular/core';
 import { Page } from '../interface/page.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +12,7 @@ import { PageService } from '../service/page.service';
 })
 export class DragAndDropComponent {
 
+  private readonly XY_REGEX = /(\d+)px/g;
   private activatedRoute = inject(ActivatedRoute);
   private componentService = inject(ComponentService);
   private pageService = inject(PageService);
@@ -24,11 +24,30 @@ export class DragAndDropComponent {
     });
   }
 
-  dragEnd(event: CdkDragEnd, page: Page, customComponent: CustomComponent) {
+  dragEnd(event: any, page: Page, customComponent: CustomComponent, div: HTMLDivElement) {
+    console.log(event);
+    
+    const dropPoint = this.retrieveXY(div.style.transform);
+    console.log(dropPoint);
+    
     if (customComponent.id) {
-      this.componentService.savePosition(customComponent.id, event.dropPoint).subscribe(data => {
+      this.componentService.savePosition(customComponent.id, dropPoint).subscribe(data => {
         this.pageService.updateSessionPageCustomComponents(page, data);
       });
     }
+  }
+
+  retrieveXY(inputString: string) {
+    const matches = [];
+    let match;
+    while ((match = this.XY_REGEX.exec(inputString)) !== null) {
+      matches.push(match[1]);
+    }
+    console.log(matches);
+    
+    return {
+      x: matches[0],
+      y: matches[1]
+    };
   }
 }
