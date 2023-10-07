@@ -31,7 +31,7 @@ public class PageServiceImpl extends AbstractQueryBuilderService<PageRepository>
 
     @Transactional
     public PageDto save(PageDto pageDto) {
-        final Page page = modelMapperCustomize.map(pageDto, Page.class);
+        final var page = modelMapperCustomize.map(pageDto, Page.class);
         return modelMapperCustomize.map(this.getRepository().save(page), PageDto.class);
     }
 

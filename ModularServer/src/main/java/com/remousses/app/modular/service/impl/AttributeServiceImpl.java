@@ -15,7 +15,7 @@ public class AttributeServiceImpl extends AbstractQueryBuilderService<AttributeR
     @Override
     @Transactional
     public AttributeDto save(AttributeDto attributeDto) {
-        final Attribute attribute = modelMapperCustomize.map(attributeDto, Attribute.class);
+        final var attribute = modelMapperCustomize.map(attributeDto, Attribute.class);
         return modelMapperCustomize.map(this.getRepository().save(attribute), AttributeDto.class);
     }
 

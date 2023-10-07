@@ -18,14 +18,14 @@ public class CustomComponentServiceImpl extends AbstractQueryBuilderService<Cust
     @Override
     @Transactional
     public CustomComponentDto save(CustomComponentDto customComponentDto) {
-        final CustomComponent customComponent = modelMapperCustomize.map(customComponentDto, CustomComponent.class);
+        final var customComponent = modelMapperCustomize.map(customComponentDto, CustomComponent.class);
         return modelMapperCustomize.map(this.getRepository().save(customComponent), CustomComponentDto.class);
     }
 
     @Override
     @Transactional
     public CustomComponentDto savePosition(Integer id, JsonNode dropPoint) {
-        final Optional<CustomComponent> customComponentOpt = this.getRepository().findById(id);
+        final var customComponentOpt = this.getRepository().findById(id);
 
         if (customComponentOpt.isPresent()) {
             customComponentOpt.get().setDropPoint(dropPoint);

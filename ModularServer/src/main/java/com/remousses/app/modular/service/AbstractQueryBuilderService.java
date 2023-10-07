@@ -41,10 +41,10 @@ public abstract class AbstractQueryBuilderService<R> {
         @SuppressWarnings("unchecked")
         final var tupleResult = (List<Tuple>) repository.getClass().getMethod("getCustomQuery", columns.getClass()).invoke(repository, columns);
 
-        final List<U> finalResult = new ArrayList<>();
+        final var finalResult = new ArrayList<U>();
         for (final Tuple tupleValue : tupleResult) {
             // Check if tuple is already in final result (to merge each same content)
-            final Optional<U> valueOpt = finalResult.stream().filter(res -> {
+            final var valueOpt = finalResult.stream().filter(res -> {
                 try {
                     return invokeGetterMethod(ID_METHOD, res).equals(tupleValue.get(0));
                 } catch (Exception e) {
