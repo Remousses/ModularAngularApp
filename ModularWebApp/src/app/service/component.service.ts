@@ -29,8 +29,8 @@ export class ComponentService {
     add(componentName: string, componentType: string, attributes: Attribute[]) {
         if (componentName) {
             const page = this.pageService.getCurrentPage();
-            
-            if (page && page.id) {
+
+            if (page?.id) {
                 const customComponent: CustomComponent = {
                     name: componentName,
                     type: componentType,
@@ -47,7 +47,7 @@ export class ComponentService {
         }
     }
 
-    savePosition(id: Number, dropPoint: any): Observable<CustomComponent> {
+    savePosition(id: number, dropPoint: any): Observable<CustomComponent> {
         return this.http.post<CustomComponent>(UrlConstant.componentUrl + id, dropPoint);
     }
 

@@ -3,7 +3,6 @@ package com.remousses.app.modular.model.dto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -27,15 +26,6 @@ public class CustomComponentDto {
 	}
 
 	//======== WARNING : both setDropPoint methods are required, they must keep this declaration order ========//
-
-//	/**
-//	 * Required for conversion when used in {@link com.remousses.app.modular.service.AbstractQueryBuilderService}
-//	 * @param dropPoint
-//	 */
-//	@SuppressWarnings("unused")
-//	public void setDropPoint(ObjectNode dropPoint) {
-//		this.dropPoint = dropPoint;
-//	}
 
 	/**
 	 * Required for conversion with {@link com.remousses.app.modular.component.ModelMapperCustomize}

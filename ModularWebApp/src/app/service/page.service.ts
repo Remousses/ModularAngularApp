@@ -45,22 +45,16 @@ export class PageService {
     sessionStorage.removeItem('pages');
   }
 
-  setCurrentPage(pageId: number) {
-    // if (pageId) {
-    //   this.currentPage = this.pages.find((page: Page) => pageId === page.id);
-    // }
-  }
-
   getCurrentPage(): Page {
     return this.pages.find((page: Page) => page.url === this.router.url.substring(1));
   }
 
   updateSessionPageCustomComponents(page: Page, customComponent: CustomComponent): Page {
-    for (let i = 0; i < this.pages.length; i++) {
-      if (this.pages[i].id === page.id) {
-        for (let j = 0; j < this.pages[i].customComponents?.length; j++) {
-          if (this.pages[i].customComponents[j].id === customComponent.id) {
-            this.pages[i].customComponents[j] = customComponent;
+    for (const p of this.pages) {
+      if (p.id === page.id) {
+        for (let j = 0; j < p.customComponents?.length; j++) {
+          if (p.customComponents[j].id === customComponent.id) {
+            p.customComponents[j] = customComponent;
             break;
           }
         }

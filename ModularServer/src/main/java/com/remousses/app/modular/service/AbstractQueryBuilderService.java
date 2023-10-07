@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.remousses.app.modular.util.QueryConstant.ADD_METHOD_PREFIX;
 import static com.remousses.app.modular.util.QueryConstant.GETTER_METHOD_PREFIX;
