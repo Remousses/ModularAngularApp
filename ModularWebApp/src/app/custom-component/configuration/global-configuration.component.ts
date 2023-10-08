@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
 import { PageService } from 'src/app/service/page.service';
 
@@ -7,14 +7,12 @@ import { PageService } from 'src/app/service/page.service';
   templateUrl: './global-configuration.component.html',
   styleUrls: ['./global-configuration.component.scss']
 })
-export class GlobalConfigurationComponent extends KnowOurDatasAbstract implements OnInit {
+export class GlobalConfigurationComponent extends KnowOurDatasAbstract {
 
   pageService = inject(PageService);
 
   allDatas: any[] = [];
   isShowDatas = false;
-
-  ngOnInit() {}
 
   showDatas() {
     this.isShowDatas = !this.isShowDatas

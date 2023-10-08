@@ -13,6 +13,7 @@ public class AttributeRepositoryCustomImpl extends AbstractQueryBuilderRepositor
         super(Attribute.class);
     }
 
+    @Override
     public List<Tuple> getCustomQuery(List<String> columns) {
         return getCustomQuery(columns);
     }

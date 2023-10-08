@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComponentService } from '../../../service/component.service';
 import { ComponentType } from '../../../util/constant/ComponentType';
 import { Attribute } from '../../../interface/attribute.interface';
@@ -8,15 +8,13 @@ import { Attribute } from '../../../interface/attribute.interface';
   templateUrl: './checkbox-configuration.component.html',
   styleUrls: ['./checkbox-configuration.component.scss']
 })
-export class CheckboxConfigurationComponent implements OnInit {
+export class CheckboxConfigurationComponent {
 
   private componentService = inject(ComponentService);
-  
+
   componentName = '';
   checked = false;
   indeterminate = false;
-
-  ngOnInit() {}
 
   addComponentName(value: string) {
     this.componentName = value;
