@@ -8,15 +8,21 @@ import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
-public abstract class AbstractQueryBuilderRepository {
+public abstract class AbstractQueryBuilderRepository<E> {
+
+    Class<E> clazzEntity;
+
+    protected AbstractQueryBuilderRepository(Class<E> clazzEntity) {
+        this.clazzEntity = clazzEntity;
+    }
 
     @PersistenceContext
     EntityManager em;
 
-    protected <T> List<Tuple> getCustomQuery(Class<T> clazz, List<String> columns) {
+    protected List<Tuple> getCustomQuery(List<String> columns) {
         var cb = em.getCriteriaBuilder();
         var tupleQuery = cb.createTupleQuery();
-        Root<T> root = tupleQuery.from(clazz);
+        var root = tupleQuery.from(clazzEntity);
 
         // root.get("fieldName") allows to build selected field
         var select = columns.stream().map(root::get).toArray(Path[]::new);

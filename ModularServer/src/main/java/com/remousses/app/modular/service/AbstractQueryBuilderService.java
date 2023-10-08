@@ -31,16 +31,16 @@ public abstract class AbstractQueryBuilderService<R> {
      * @param clazzDto
      * @param columns
      * @return list of
-     * @param <U>
+     * @param <D>
      * @throws Exception
      */
-    public <U> List<U> getCustomQuery(final Class<U> clazzDto, final List<String> columns) throws Exception {
+    public <D> List<D> getCustomQuery(final Class<D> clazzDto, final List<String> columns) throws Exception {
         columns.add(0, "id");
 
         @SuppressWarnings("unchecked")
-        final var tupleResult = (List<Tuple>) repository.getClass().getMethod("getCustomQuery", columns.getClass()).invoke(repository, columns);
+        final var tupleResult = (List<Tuple>) repository.getClass().getMethod("getCustomQuery", columns.getClass().getInterfaces()[0]).invoke(repository, columns);
 
-        final var finalResult = new ArrayList<U>();
+        final var finalResult = new ArrayList<D>();
         for (final Tuple tupleValue : tupleResult) {
             // Check if tuple is already in final result (to merge each same content)
             final var valueOpt = finalResult.stream().filter(res -> {
@@ -53,7 +53,7 @@ public abstract class AbstractQueryBuilderService<R> {
 
             final var existingValue = valueOpt.isPresent();
 
-            U prepareDto;
+            D prepareDto;
             if (existingValue) {
                 prepareDto = valueOpt.get();
             } else {

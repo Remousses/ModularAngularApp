@@ -4,12 +4,17 @@ import com.remousses.app.modular.model.entity.Page;
 import com.remousses.app.modular.repository.AbstractQueryBuilderRepository;
 import jakarta.persistence.Tuple;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class PageRepositoryCustomImpl extends AbstractQueryBuilderRepository implements PageRepositoryCustom {
-    public List<Tuple> getCustomQuery(ArrayList<String> columns) {
-        return getCustomQuery(Page.class, columns);
+public class PageRepositoryCustomImpl extends AbstractQueryBuilderRepository<Page> implements PageRepositoryCustom {
+
+    public  PageRepositoryCustomImpl() {
+        super(Page.class);
+    }
+
+    @Override
+    public List<Tuple> getCustomQuery(List<String> columns) {
+        return super.getCustomQuery(columns);
     }
 }
