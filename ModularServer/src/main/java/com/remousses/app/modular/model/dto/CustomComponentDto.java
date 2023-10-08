@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +28,10 @@ public class CustomComponentDto {
 	}
 
 	//======== WARNING : both setDropPoint methods are required, they must keep this declaration order ========//
+	@SuppressWarnings("unused")
+	public void setDropPoint(ObjectNode dropPoint) {
+		this.dropPoint = dropPoint;
+	}
 
 	/**
 	 * Required for conversion with {@link com.remousses.app.modular.component.ModelMapperCustomize}
