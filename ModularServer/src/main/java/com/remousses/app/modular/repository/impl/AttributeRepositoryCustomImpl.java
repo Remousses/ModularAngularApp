@@ -15,6 +15,6 @@ public class AttributeRepositoryCustomImpl extends AbstractQueryBuilderRepositor
 
     @Override
     public List<Tuple> getCustomQuery(List<String> columns) {
-        return getCustomQuery(columns);
+        return super.getCustomQuery(columns);
     }
 }
