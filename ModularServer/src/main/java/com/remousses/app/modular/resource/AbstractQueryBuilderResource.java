@@ -21,6 +21,12 @@ public abstract class AbstractQueryBuilderResource<D, S> {
         return service;
     }
 
+    /**
+     * Allows to create custom query.
+     * @param columns: fields in dedicated entity.
+     * @return a list of the dedicated Dto
+     * @throws Exception
+     */
     @SuppressWarnings({"unused", "unchecked"})
     @GetMapping("getCustomQuery")
     public List<D> getCustomQuery(@RequestBody List<String> columns) throws Exception {
