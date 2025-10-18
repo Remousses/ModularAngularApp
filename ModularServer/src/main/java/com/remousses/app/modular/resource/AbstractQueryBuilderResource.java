@@ -1,11 +1,12 @@
 package com.remousses.app.modular.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class AbstractQueryBuilderResource<D, S> {
 
@@ -28,7 +29,7 @@ public abstract class AbstractQueryBuilderResource<D, S> {
      * @throws Exception
      */
     @SuppressWarnings({"unused", "unchecked"})
-    @GetMapping("getCustomQuery")
+    @PostMapping("getCustomQuery")
     public List<D> getCustomQuery(@RequestBody List<String> columns) throws Exception {
         try {
             return (List<D>) service.getClass().getMethod("getCustomQuery", Class.class, List.class)

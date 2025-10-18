@@ -2,7 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
-import { UrlConstant } from "../util/constant/UrlConstant";
+import { UrlConstant } from "../util/constant/url.constant";
 import { Page } from "../interface/page.interface";
 import { CustomComponent } from "../interface/component.interface";
 import { Router } from "@angular/router";

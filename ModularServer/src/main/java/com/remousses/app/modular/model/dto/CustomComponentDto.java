@@ -2,6 +2,7 @@ package com.remousses.app.modular.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class CustomComponentDto {
 	 * Required for conversion with {@link com.remousses.app.modular.component.ModelMapperCustomize}
 	 * @param dropPoint
 	 */
+	@JsonSetter
 	@SuppressWarnings("unused")
 	public void setDropPoint(JsonNode dropPoint) {
 		this.dropPoint = dropPoint;

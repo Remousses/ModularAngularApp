@@ -7,8 +7,7 @@ import {
 } from '@angular/core';
 
 import { Attribute } from '../interface/attribute.interface';
-
-import { ComponentType } from '../util/constant/ComponentType';
+import { ComponentTypeConstant } from '../util/constant/component-type.constant';
 
 
 @Directive({
@@ -23,11 +22,11 @@ export class ControlFactoryDirective implements OnChanges {
 
     ngOnChanges() {
         if (!this.componentType) return;
-        if(!ComponentType.TYPE_MAP[this.componentType]) {
+        if(!ComponentTypeConstant.TYPE_MAP[this.componentType]) {
             throw new Error(`No class defined in TYPE_MAP for '${this.componentType}'`);
         }
         
-        const compRef = this.container.createComponent(ComponentType.TYPE_MAP[this.componentType]);
+        const compRef = this.container.createComponent(ComponentTypeConstant.TYPE_MAP[this.componentType]);
         
         if (this.attributes) {
             this.attributes.forEach(attr => {

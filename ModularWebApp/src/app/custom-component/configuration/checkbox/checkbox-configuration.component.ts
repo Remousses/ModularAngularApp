@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ComponentService } from '../../../service/component.service';
-import { ComponentType } from '../../../util/constant/ComponentType';
+import { ComponentTypeConstant } from '../../../util/constant/component-type.constant';
 import { Attribute } from '../../../interface/attribute.interface';
 
 @Component({
@@ -33,6 +33,6 @@ export class CheckboxConfigurationComponent {
         value: this.indeterminate
       }
     ];
-    this.componentService.add(this.componentName, ComponentType.CHECKBOX, attributes);
+    this.componentService.add(this.componentName, ComponentTypeConstant.CHECKBOX, attributes);
   }
 }

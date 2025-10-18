@@ -2,7 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { CustomComponent } from "../interface/component.interface";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { UrlConstant } from "../util/constant/UrlConstant";
+import { UrlConstant } from "../util/constant/url.constant";
 import { PageService } from "./page.service";
 import { Attribute } from "../interface/attribute.interface";
 import { MatSnackBar } from "@angular/material/snack-bar";

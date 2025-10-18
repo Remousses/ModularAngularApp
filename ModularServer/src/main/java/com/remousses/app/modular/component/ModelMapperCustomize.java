@@ -1,5 +1,6 @@
 package com.remousses.app.modular.component;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,6 @@ public class ModelMapperCustomize extends ModelMapper {
         return source
                 .stream()
                 .map(element -> this.map(element, targetClass))
-                .toList();
+                .collect(Collectors.toList());
     }
 }

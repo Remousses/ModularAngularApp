@@ -2,18 +2,45 @@ Table configuration
 <app-component-name (componentNameChange)="addComponentName($event)"></app-component-name>
 
 <br><br>
-<mat-form-field>
-    <mat-label>Columns url</mat-label>
-    <input matInput type="text" [(ngModel)]="displayedColumnsUrl">
-</mat-form-field>
+<mat-radio-group [(ngModel)]="callFromDatabase">
+    <mat-radio-button [value]="true">Call from your database</mat-radio-button>
+    <mat-radio-button [value]="false">Call from API</mat-radio-button>
+</mat-radio-group>
 <br><br>
-<mat-form-field>
-    <mat-label>Data url</mat-label>
-    <input matInput type="text" [(ngModel)]="datasUrl">
-</mat-form-field>
 
+<ng-container *ngIf="callFromDatabase; else callFromApi">
+  <mat-form-field>
+    <mat-label>Url</mat-label>
+    <input matInput type="text" readonly [(ngModel)]="datasUrlFromDb">
+  </mat-form-field>
+  <br><br>
+  <mat-form-field *ngIf="tablesInformations.length !== 0">
+    <mat-label>Tables informations</mat-label>
+    <mat-select name="tableNameSelected" (selectionChange)="tableInformationChange()" [(ngModel)]="tableNameSelected">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let info of tablesInformations" [value]="info.name">{{ info.name }}</mat-option>
+  </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="tableFieldsName.length !== 0">
+      <mat-label>Fields</mat-label>
+      <mat-select name="tableFieldsSelected" (selectionChange)="tableFieldsChange()" [(ngModel)]="tableFieldsSelected" multiple>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let tableField of tableFieldsName" [value]="tableField">{{ tableField }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+</ng-container>
+<ng-template #callFromApi>
+  <mat-form-field>
+      <mat-label>Columns url</mat-label>
+      <input matInput type="text" [(ngModel)]="displayedColumnsUrl">
+  </mat-form-field>
+  <mat-form-field>
+      <mat-label>Data url</mat-label>
+      <input matInput type="text" [(ngModel)]="datasUrl">
+  </mat-form-field>
+</ng-template>
 <br><br>
-<app-table *ngIf="loadData" [displayedColumnsUrl]="displayedColumnsUrl" [datasUrl]="datasUrl"></app-table>
+<app-table *ngIf="loadData" [displayedColumnsUrl]="displayedColumnsUrl" [datasUrl]="datasUrl" [displayedColumnsFromDb]="displayedColumnsFromDb" [datasUrlFromDb]="datasUrlFromDb"></app-table>
 
 <button *ngIf="!loadData" mat-button (click)="loadData = true">Preview</button>
 <button *ngIf="loadData" mat-button (click)="addComponent()">Add component</button>
