@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   mysql-db:
     container_name: mysql-db
@@ -14,8 +13,3 @@ services:
       MYSQL_ROOT_PASSWORD: Modular_App
     ports:
       - 3306:3306
-
-networks: 
-  default:
-    external:
-      name: modular_app_network
