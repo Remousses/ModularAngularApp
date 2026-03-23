@@ -1,5 +1,5 @@
-<mat-drawer-container class="container" autosize>
-    <mat-drawer #menu mode="side" position="start">
+<mat-drawer-container class="h-full" autosize>
+    <mat-drawer #menu mode="side" position="start" [opened]="true">
         <mat-nav-list>
             <a mat-list-item  routerLink="home">home</a>
             <ng-container *ngFor="let page of pages">
@@ -7,17 +7,18 @@
             </ng-container>
         </mat-nav-list> 
     </mat-drawer>
-    <mat-drawer #globalConfig mode="side"  position="end">
+    <mat-drawer #globalConfig mode="side"  position="end" [opened]="true">
         <app-global-configuration></app-global-configuration>
     </mat-drawer>
 
-    <div class="sidenav-content">
-        <button mat-button class="sidenav-button float-left" mat-button (click)="menu.toggle()">
+    <div class="flex justify-between">
+        <button mat-button mat-button (click)="menu.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <button mat-button class="sidenav-button float-right" mat-button (click)="globalConfig.toggle()">
+        <button mat-button mat-button (click)="globalConfig.toggle()">
             <mat-icon>more_vert</mat-icon>
         </button>
-        <router-outlet></router-outlet>
     </div>
+
+    <router-outlet></router-outlet>
 </mat-drawer-container>

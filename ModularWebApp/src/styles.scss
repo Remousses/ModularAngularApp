@@ -4,8 +4,7 @@
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 @import '../node_modules/ngx-toastr/toastr';
 
-html,
-body {
-    height: 100vh;
-    margin: 0 !important;
+@layer base {
+  h1 { @apply text-4xl font-bold mb-4; }
+  h2 { @apply text-2xl font-semibold mb-3; }
 }

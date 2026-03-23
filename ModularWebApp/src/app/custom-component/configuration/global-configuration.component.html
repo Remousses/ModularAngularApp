@@ -1,22 +1,33 @@
-<mat-card>
-    <mat-card-header>Configuration</mat-card-header>
-    <mat-card-content>
+<div class="flex flex-col gap-3 pt-10 px-4">
+  <h1>Configuration</h1>
 
-        <button mat-button (click)="pageService.clearLoadedPages()">Clear cache</button>
-        <br><br>
-        <button mat-button (click)="showDatas()">Display all datas</button>
-        <ngx-json-viewer *ngIf="isShowDatas && allDatas" [json]="allDatas" [expanded]="false"></ngx-json-viewer>
-        <br><br>
+  <div>
+    <button mat-raised-button (click)="pageService.clearLoadedPages()">
+      Clear cache
+    </button>
+  </div>
 
-        <app-page></app-page>
+  <div class="space-y-2">
+    <button mat-raised-button (click)="showDatas()">Display all datas</button>
 
-        <br><br>
-
-        <app-checkbox-configuration></app-checkbox-configuration>
-
-        <br><br>
-
-        <app-table-configuration></app-table-configuration>
-
-    </mat-card-content>
-</mat-card>
+    <div
+      *ngIf="isShowDatas && allDatas"
+      class="grid grid-cols-1 overflow-hidden"
+    >
+      <div
+        class="whitespace-pre-wrap break-all shadow-inner bg-gray-50 p-4 rounded max-w-lg"
+      >
+        <ngx-json-viewer [json]="allDatas" [expanded]="false"></ngx-json-viewer>
+      </div>
+    </div>
+  </div>
+  <div>
+    <app-page></app-page>
+  </div>
+  <div>
+    <app-checkbox-configuration></app-checkbox-configuration>
+  </div>
+  <div>
+    <app-table-configuration></app-table-configuration>
+  </div>
+</div>

@@ -3,8 +3,7 @@ import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
 
 @Component({
   selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss']
+  templateUrl: './checkbox.component.html'
 })
 export class CheckboxComponent extends KnowOurDatasAbstract implements OnInit {
   @Input({ required: true }) checked = false;

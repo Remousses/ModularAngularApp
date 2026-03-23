@@ -5,8 +5,7 @@ import { Attribute } from '../../../interface/attribute.interface';
 
 @Component({
   selector: 'app-checkbox-configuration',
-  templateUrl: './checkbox-configuration.component.html',
-  styleUrls: ['./checkbox-configuration.component.scss']
+  templateUrl: './checkbox-configuration.component.html'
 })
 export class CheckboxConfigurationComponent {
 
