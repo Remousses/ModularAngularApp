@@ -2,10 +2,15 @@ import { Component, inject } from '@angular/core';
 import { ComponentService } from '../../../service/component.service';
 import { ComponentTypeConstant } from '../../../util/constant/component-type.constant';
 import { Attribute } from '../../../interface/attribute.interface';
+import { ComponentNameComponent } from '../component-name/component-name.component';
+import { CheckboxComponent } from '../../prepare-component/checkbox/checkbox.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-checkbox-configuration',
-  templateUrl: './checkbox-configuration.component.html'
+    selector: 'app-checkbox-configuration',
+    templateUrl: './checkbox-configuration.component.html',
+    imports: [ComponentNameComponent, CheckboxComponent, MatButton],
+    standalone: true
 })
 export class CheckboxConfigurationComponent {
 

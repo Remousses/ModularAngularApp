@@ -1,11 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageService } from '../service/page.service';
 import { Page } from '../interface/page.interface';
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-page',
-  templateUrl: './create-page.component.html'
+    selector: 'app-page',
+    templateUrl: './create-page.component.html',
+    imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatButton],
+    standalone: true
 })
 export class CreatePageComponent {
   

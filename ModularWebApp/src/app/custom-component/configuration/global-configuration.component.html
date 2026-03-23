@@ -10,16 +10,17 @@
   <div class="space-y-2">
     <button mat-raised-button (click)="showDatas()">Display all datas</button>
 
-    <div
-      *ngIf="isShowDatas && allDatas"
-      class="grid grid-cols-1 overflow-hidden"
-    >
+    @if (isShowDatas && allDatas) {
       <div
-        class="whitespace-pre-wrap break-all shadow-inner bg-gray-50 p-4 rounded max-w-lg"
-      >
-        <ngx-json-viewer [json]="allDatas" [expanded]="false"></ngx-json-viewer>
+        class="grid grid-cols-1 overflow-hidden"
+        >
+        <div
+          class="whitespace-pre-wrap break-all shadow-inner bg-gray-50 p-4 rounded max-w-lg"
+          >
+          <ngx-json-viewer [json]="allDatas" [expanded]="false"></ngx-json-viewer>
+        </div>
       </div>
-    </div>
+    }
   </div>
   <div>
     <app-page></app-page>

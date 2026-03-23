@@ -1,7 +1,10 @@
 import { Component, inject } from "@angular/core";
 import { KnowOurDatasService } from "../service/know-our-datas.service";
 
-@Component({ template: '' })
+@Component({
+    template: '',
+    standalone: true
+})
 export abstract class KnowOurDatasAbstract {
     private readonly knowOurDatasService = inject(KnowOurDatasService);
 

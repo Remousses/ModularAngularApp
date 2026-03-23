@@ -2,14 +2,34 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Attribute } from 'src/app/interface/attribute.interface';
 import { TableInformationService } from 'src/app/service/table-information.service';
 import { QueryBuilderUtil } from 'src/app/util/query-builder.util';
+import { ComponentNameComponent } from '../component-name/component-name.component';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { TableComponent } from '../../prepare-component/table/table.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-table-configuration',
   templateUrl: './table-configuration.component.html',
-  styleUrls: ['./table-configuration.component.scss']
+  styleUrls: ['./table-configuration.component.scss'],
+  imports: [
+    ComponentNameComponent,
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSelectModule,
+    TableComponent,
+    MatButton
+  ],
+  standalone: true,
 })
 export class TableConfigurationComponent implements OnInit {
-
   private readonly tableInformationService = inject(TableInformationService);
 
   componentName = '';
@@ -40,41 +60,41 @@ export class TableConfigurationComponent implements OnInit {
         {
           name: 'displayedColumnsFromDb',
           type: 'Array',
-          value: this.displayedColumnsFromDb
+          value: this.displayedColumnsFromDb,
         },
         {
           name: 'datasUrlFromInternal',
           type: 'String',
-          value: this.datasUrlFromInternal
-        }
-      ]
+          value: this.datasUrlFromInternal,
+        },
+      ];
     } else {
       attributes = [
         {
           name: 'displayedColumnsUrl',
           type: 'String',
-          value: this.displayedColumnsUrl
+          value: this.displayedColumnsUrl,
         },
         {
           name: 'datasUrl',
           type: 'String',
-          value: this.datasUrl
-        }
+          value: this.datasUrl,
+        },
       ];
     }
     console.log(attributes);
-    
+
     // this.componentService.add(this.componentName, ComponentTypeConstant.TABLE, attributes);
   }
 
   getTableInformations() {
-    this.tableInformationService.get().subscribe(info => {
+    this.tableInformationService.get().subscribe((info) => {
       this.tablesInformations.length = 0;
       this.tableFieldsName.length = 0;
-      Object.entries(info).forEach(value => {
+      Object.entries(info).forEach((value) => {
         this.tablesInformations.push({
           name: value[0],
-          fields: value[1]
+          fields: value[1],
         });
       });
     });
@@ -82,21 +102,27 @@ export class TableConfigurationComponent implements OnInit {
 
   tableInformationChange() {
     this.tableFieldsSelected.length = 0;
-    const dropDownData = this.tablesInformations.find((data: any) => data.name === this.tableNameSelected);
+    const dropDownData = this.tablesInformations.find(
+      (data: any) => data.name === this.tableNameSelected,
+    );
     if (dropDownData) {
       this.tableFieldsName = dropDownData.fields;
 
-      if(this.tableFieldsName){
+      if (this.tableFieldsName) {
         this.tableFieldsSelected = [this.tableFieldsName[0]];
         this.tableFieldsChange();
       }
     } else {
       this.tableFieldsName = [];
     }
-    this.datasUrlFromInternal = QueryBuilderUtil.getCustomQueryUrl(this.tableNameSelected);
+    this.datasUrlFromInternal = QueryBuilderUtil.getCustomQueryUrl(
+      this.tableNameSelected,
+    );
   }
 
   tableFieldsChange() {
-    this.displayedColumnsFromDb = this.tableFieldsSelected.map(e => e.split('#')[0]);
+    this.displayedColumnsFromDb = this.tableFieldsSelected.map(
+      (e) => e.split('#')[0],
+    );
   }
 }

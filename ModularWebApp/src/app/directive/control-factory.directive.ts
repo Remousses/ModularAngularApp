@@ -1,9 +1,9 @@
 import {
-    Directive,
-    Input,
-    OnChanges,
-    ViewContainerRef,
-    inject
+  Directive,
+  OnChanges,
+  ViewContainerRef,
+  inject,
+  input
 } from '@angular/core';
 
 import { Attribute } from '../interface/attribute.interface';
@@ -11,25 +11,28 @@ import { ComponentTypeConstant } from '../util/constant/component-type.constant'
 
 
 @Directive({
-    selector: '[ctrl-factory]'
+    selector: '[ctrl-factory]',
+    standalone: true
 })
 export class ControlFactoryDirective implements OnChanges {
 
     private readonly container = inject(ViewContainerRef);
 
-    @Input() componentType = '';
-    @Input() attributes: Attribute[] | undefined = [];
+    readonly componentType = input('');
+    readonly attributes = input<Attribute[] | undefined>([]);
 
     ngOnChanges() {
-        if (!this.componentType) return;
-        if(!ComponentTypeConstant.TYPE_MAP[this.componentType]) {
-            throw new Error(`No class defined in TYPE_MAP for '${this.componentType}'`);
+        const componentType = this.componentType();
+        if (!componentType) return;
+        if(!ComponentTypeConstant.TYPE_MAP[componentType]) {
+            throw new Error(`No class defined in TYPE_MAP for '${componentType}'`);
         }
         
-        const compRef = this.container.createComponent(ComponentTypeConstant.TYPE_MAP[this.componentType]);
+        const compRef = this.container.createComponent(ComponentTypeConstant.TYPE_MAP[componentType]);
         
-        if (this.attributes) {
-            this.attributes.forEach(attr => {
+        const attributes = this.attributes();
+        if (attributes) {
+            attributes.forEach(attr => {
                 switch (attr.type) {
                     case 'Boolean':
                         attr.value = (/true/i).test(attr.value);

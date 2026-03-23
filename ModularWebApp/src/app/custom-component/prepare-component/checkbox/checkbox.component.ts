@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, model } from '@angular/core';
 import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html'
+  templateUrl: './checkbox.component.html',
+  imports: [MatCard, MatCardContent, MatCheckbox, FormsModule],
+  standalone: true,
 })
 export class CheckboxComponent extends KnowOurDatasAbstract implements OnInit {
-  @Input({ required: true }) checked = false;
-  @Input({ required: true }) indeterminate = false;
-
-  @Output() checkedChange = new EventEmitter<boolean>();
-  @Output() indeterminateChange = new EventEmitter<boolean>();
+  readonly checked = model<boolean>(false);
+  readonly indeterminate = model<boolean>(false);
 
   ngOnInit() {
     this.load(this);
