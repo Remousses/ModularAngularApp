@@ -1,0 +1,5 @@
+Add:
+    ☐ into global configuration, add select box to chose the component to handle
+
+Errors:
+    ☐ cache issue : when adding a component, atttribute customComponents into page object is cleared
