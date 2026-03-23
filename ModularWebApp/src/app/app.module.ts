@@ -36,7 +36,7 @@ import { TableComponent } from './custom-component/prepare-component/table/table
 
 import { HomeComponent } from './home/home.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
-import { PageComponent } from './page/page.component';
+import { CreatePageComponent } from './create-page/create-page.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { PageComponent } from './page/page.component';
     TableConfigurationComponent,
     HomeComponent,
     DragAndDropComponent,
-    PageComponent,
+    CreatePageComponent,
     CheckboxComponent,
     TableComponent
   ],

@@ -5,10 +5,9 @@ import { Page } from '../interface/page.interface';
 
 @Component({
   selector: 'app-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss']
+  templateUrl: './create-page.component.html'
 })
-export class PageComponent {
+export class CreatePageComponent {
   
   private readonly pageService = inject(PageService);
   pageForm = new FormGroup({
