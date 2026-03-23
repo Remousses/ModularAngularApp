@@ -12,13 +12,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ComponentService {
 
-    private http = inject(HttpClient);
-    private pageService = inject(PageService);
-    private snackBar = inject(MatSnackBar);
-
-    getComponent() {
-        return null;
-    }
+    private readonly http = inject(HttpClient);
+    private readonly pageService = inject(PageService);
+    private readonly snackBar = inject(MatSnackBar);
 
     save(customComponent: CustomComponent): Observable<CustomComponent> {
         const clone = structuredClone(customComponent);

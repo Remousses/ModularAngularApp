@@ -9,7 +9,7 @@ import { Attribute } from '../../../interface/attribute.interface';
 })
 export class CheckboxConfigurationComponent {
 
-  private componentService = inject(ComponentService);
+  private readonly componentService = inject(ComponentService);
 
   componentName = '';
   checked = false;

@@ -11,8 +11,8 @@ import { QueryBuilderService } from 'src/app/service/query-builder.service';
 })
 export class TableComponent extends KnowOurDatasAbstract implements OnInit {
   
-  private apiService = inject(ApiService);
-  private querBuilderService = inject(QueryBuilderService);
+  private readonly apiService = inject(ApiService);
+  private readonly querBuilderService = inject(QueryBuilderService);
   
   @Input({ required: true }) displayedColumnsFromDb: string[] = [];
   @Input({ required: true }) datasUrlFromDb: string = '';

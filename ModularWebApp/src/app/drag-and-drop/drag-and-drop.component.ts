@@ -10,12 +10,12 @@ import { PageService } from '../service/page.service';
   templateUrl: './drag-and-drop.component.html',
   styleUrls: ['./drag-and-drop.component.scss']
 })
-export class DragAndDropComponent {
+export class DragAndDropComponent implements OnInit {
 
   private readonly XY_REGEX = /(\d+)px/g;
-  private activatedRoute = inject(ActivatedRoute);
-  private componentService = inject(ComponentService);
-  private pageService = inject(PageService);
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly componentService = inject(ComponentService);
+  private readonly pageService = inject(PageService);
   page!: Page;
 
   ngOnInit() {

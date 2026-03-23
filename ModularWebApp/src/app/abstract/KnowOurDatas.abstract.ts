@@ -3,7 +3,7 @@ import { KnowOurDatasService } from "../service/know-our-datas.service";
 
 @Component({ template: '' })
 export abstract class KnowOurDatasAbstract {
-    private knowOurDatasService = inject(KnowOurDatasService);
+    private readonly knowOurDatasService = inject(KnowOurDatasService);
 
     load(datas: any) {
         let formatData = { ...datas };

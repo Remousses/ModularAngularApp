@@ -10,7 +10,7 @@ import { Page } from '../interface/page.interface';
 })
 export class PageComponent {
   
-  private pageService = inject(PageService);
+  private readonly pageService = inject(PageService);
   pageForm = new FormGroup({
     title: new FormControl('', { nonNullable: true, validators: Validators.required }),
     url: new FormControl('', { nonNullable: true, validators: Validators.required })

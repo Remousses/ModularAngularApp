@@ -12,9 +12,9 @@ import { Router } from "@angular/router";
 })
 export class PageService {
   
-  private http = inject(HttpClient);
-  private toastr = inject(ToastrService);
-  private router = inject(Router);
+  private readonly http = inject(HttpClient);
+  private readonly toastr = inject(ToastrService);
+  private readonly router = inject(Router);
 
   private pages!: any;
 

@@ -7,7 +7,7 @@ import { Page } from './interface/page.interface';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  private pageService = inject(PageService);
+  private readonly pageService = inject(PageService);
   pages: Page[] = []
   
 

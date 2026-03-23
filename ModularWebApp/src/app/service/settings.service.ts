@@ -11,10 +11,10 @@ import { HomeComponent } from '../home/home.component';
 })
 export class SettingsService {
 
-    private injector = inject(Injector);
-    private pageService = inject(PageService);
+    private readonly injector = inject(Injector);
+    private readonly pageService = inject(PageService);
 
-    private routes: any[] = [
+    private readonly routes: any[] = [
         {
             path: '', redirectTo: 'home', pathMatch: 'full'
         },

@@ -8,7 +8,7 @@ import { PageService } from 'src/app/service/page.service';
 })
 export class GlobalConfigurationComponent extends KnowOurDatasAbstract {
 
-  pageService = inject(PageService);
+  readonly pageService = inject(PageService);
 
   allDatas: any[] = [];
   isShowDatas = false;

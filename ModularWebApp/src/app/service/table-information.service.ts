@@ -8,7 +8,7 @@ import { UrlConstant } from "../util/constant/url.constant";
 })
 export class TableInformationService {
 
-    private http = inject(HttpClient);
+    private readonly http = inject(HttpClient);
 
     get(): Observable<Map<string, string[]>> {
         return this.http.get<Map<string, string[]>>(UrlConstant.tableInformation);

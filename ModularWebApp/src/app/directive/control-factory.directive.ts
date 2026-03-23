@@ -15,7 +15,7 @@ import { ComponentTypeConstant } from '../util/constant/component-type.constant'
 })
 export class ControlFactoryDirective implements OnChanges {
 
-    private container = inject(ViewContainerRef);
+    private readonly container = inject(ViewContainerRef);
 
     @Input() componentType = '';
     @Input() attributes: Attribute[] | undefined = [];
@@ -35,10 +35,10 @@ export class ControlFactoryDirective implements OnChanges {
                         attr.value = (/true/i).test(attr.value);
                         break;
                     case 'Number':
-                        attr.value = parseInt(attr.value);
+                        attr.value = Number.parseInt(attr.value);
                         break;
                     case 'Float':
-                        attr.value = parseFloat(attr.value);
+                        attr.value = Number.parseFloat(attr.value);
                         break;
                     case 'Array':
                         attr.value = JSON.parse(attr.value);

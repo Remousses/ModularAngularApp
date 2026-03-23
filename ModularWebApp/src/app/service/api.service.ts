@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 })
 export class ApiService {
 
-    private http = inject(HttpClient);
+    private readonly http = inject(HttpClient);
 
     get(url: string): Observable<any> {
         return this.http.get<any>(url);

@@ -1,10 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { lastValueFrom } from "rxjs";
 import { Attribute } from 'src/app/interface/attribute.interface';
-import { ComponentService } from 'src/app/service/component.service';
-import { QueryBuilderService } from 'src/app/service/query-builder.service';
 import { TableInformationService } from 'src/app/service/table-information.service';
-import { ComponentTypeConstant } from 'src/app/util/constant/component-type.constant';
 import { QueryBuilderUtil } from 'src/app/util/query-builder.util';
 
 @Component({
@@ -14,9 +10,7 @@ import { QueryBuilderUtil } from 'src/app/util/query-builder.util';
 })
 export class TableConfigurationComponent implements OnInit {
 
-  private componentService = inject(ComponentService);
-  private tableInformationService = inject(TableInformationService);
-  private queryBuilderService = inject(QueryBuilderService);
+  private readonly tableInformationService = inject(TableInformationService);
 
   componentName = '';
   displayedColumnsFromDb: string[] = [];
