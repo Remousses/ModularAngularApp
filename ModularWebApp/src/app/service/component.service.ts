@@ -23,23 +23,24 @@ export class ComponentService {
     }
 
     add(componentName: string, componentType: string, attributes: Attribute[]) {
-        if (componentName) {
-            const page = this.pageService.getCurrentPage();
+        if (!componentName) {
+            return;
+        }
+        const page = this.pageService.getCurrentPage();
 
-            if (page?.id) {
-                const customComponent: CustomComponent = {
-                    name: componentName,
-                    type: componentType,
-                    page,
-                    attributes
-                };
-                this.avoidCircularError(customComponent);
-                const clone = structuredClone(customComponent);
-                this.http.post<CustomComponent>(UrlConstant.componentUrl + 'add/' + customComponent.page.id, clone)
-                    .subscribe(data => this.pageService.updateSessionPageCustomComponents(page, data));
-            } else {
-                this.snackBar.open('Current page not stored in database', 'Close', { duration: 4000 });
-            }
+        if (page?.id) {
+            const customComponent: CustomComponent = {
+                name: componentName,
+                type: componentType,
+                page,
+                attributes
+            };
+            this.avoidCircularError(customComponent);
+            const clone = structuredClone(customComponent);
+            this.http.post<CustomComponent>(UrlConstant.componentUrl + 'add/' + customComponent.page.id, clone)
+                .subscribe(data => this.pageService.addSessionPageCustomComponents(page.id!, customComponent));
+        } else {
+            this.snackBar.open('Current page not stored in database', 'Close', { duration: 4000 });
         }
     }
 
@@ -49,5 +50,20 @@ export class ComponentService {
 
     private avoidCircularError(customComponent: CustomComponent) {
         customComponent.page.customComponents = [];
+    }
+
+    deleteById(comp: CustomComponent) {
+        if (!comp) {
+            return;
+        }
+
+        const page = this.pageService.getCurrentPage();
+
+        if (page?.id) {
+            this.http.delete<void>(UrlConstant.componentUrl + comp.id)
+                .subscribe(_ => this.pageService.deleteSessionPageCustomComponents(page.id!, comp));
+        } else {
+            this.snackBar.open('Current page not stored in database', 'Close', { duration: 4000 });
+        }
     }
 }

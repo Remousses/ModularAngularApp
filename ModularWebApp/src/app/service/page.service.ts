@@ -16,7 +16,7 @@ export class PageService {
   private readonly toastr = inject(ToastrService);
   private readonly router = inject(Router);
 
-  private pages!: any;
+  private pages!: Page[];
 
   findCurrentPage(title:  string): Observable<Page> {
     return this.http.get<Page>(UrlConstant.pageUrl + title);
@@ -27,12 +27,12 @@ export class PageService {
   }
 
   getLoadedPages(): Page[] {
-    this.pages = sessionStorage.getItem('pages');
-    if (!this.pages) {
+    const pages = sessionStorage.getItem('pages');
+    if (!pages) {
       return [];
     }
 
-    this.pages = JSON.parse(this.pages) as Page[]
+    this.pages = JSON.parse(pages) as Page[]
 
     return this.pages;
   }
@@ -45,24 +45,33 @@ export class PageService {
     sessionStorage.removeItem('pages');
   }
 
-  getCurrentPage(): Page {
+  getCurrentPage(): Page | undefined {
     return this.pages.find((page: Page) => page.url === this.router.url.substring(1));
   }
 
-  updateSessionPageCustomComponents(page: Page, customComponent: CustomComponent): Page {
-    for (const p of this.pages) {
-      if (p.id === page.id) {
-        for (let j = 0; j < p.customComponents?.length; j++) {
-          if (p.customComponents[j].id === customComponent.id) {
-            p.customComponents[j] = customComponent;
-            break;
-          }
-        }
-      }
+  deleteSessionPageCustomComponents(pageId: number, customComponent: CustomComponent): void {
+    const page = this.pages[this.pages.findIndex(p => p.id === pageId)];
+    if (!page) {
+      return;
+    }
+    page.customComponents = page.customComponents?.filter(c => c.id !== customComponent.id);
+    this.updateSessionPages();
+  }
+
+  addSessionPageCustomComponents(pageId: number, customComponent: CustomComponent): void {
+    const page = this.pages[this.pages.findIndex(p => p.id === pageId)];
+    if (!page) {
+      return;
+    }
+    const compIndex = page.customComponents?.findIndex(c => c.id === customComponent.id);
+    
+    if (compIndex !== -1 && compIndex !== undefined) {
+      page.customComponents![compIndex] = customComponent;
+    } else {
+      page.customComponents!.push(customComponent);
     }
 
     this.updateSessionPages();
-    return page;
   }
 
   updateSessionPages() {

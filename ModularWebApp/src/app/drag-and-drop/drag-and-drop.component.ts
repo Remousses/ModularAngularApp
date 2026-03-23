@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Page } from '../interface/page.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentService } from '../service/component.service';
@@ -24,12 +24,16 @@ export class DragAndDropComponent implements OnInit {
     });
   }
 
+  removeComponent(comp: CustomComponent) {
+    this.componentService.deleteById(comp);
+  }
+
   dragEnd(event: any, page: Page, customComponent: CustomComponent, div: HTMLDivElement) {
     const dropPoint = this.retrieveXY(div.style.transform);
     
     if (customComponent.id) {
       this.componentService.savePosition(customComponent.id, dropPoint).subscribe(data => {
-        this.pageService.updateSessionPageCustomComponents(page, data);
+        this.pageService.addSessionPageCustomComponents(page.id!, data);
       });
     }
   }
