@@ -3,15 +3,15 @@ Table configuration
 
 <br><br>
 <mat-radio-group [(ngModel)]="callFromDatabase">
-    <mat-radio-button [value]="true">Call from your database</mat-radio-button>
-    <mat-radio-button [value]="false">Call from API</mat-radio-button>
+    <mat-radio-button [value]="true">Call from internal API</mat-radio-button>
+    <mat-radio-button [value]="false">Call from external API</mat-radio-button>
 </mat-radio-group>
 <br><br>
 
 <ng-container *ngIf="callFromDatabase; else callFromApi">
   <mat-form-field>
     <mat-label>Url</mat-label>
-    <input matInput type="text" readonly [(ngModel)]="datasUrlFromDb">
+    <input matInput type="text" readonly [(ngModel)]="datasUrlFromInternal">
   </mat-form-field>
   <br><br>
   <mat-form-field *ngIf="tablesInformations.length !== 0">
@@ -40,7 +40,7 @@ Table configuration
   </mat-form-field>
 </ng-template>
 <br><br>
-<app-table *ngIf="loadData" [displayedColumnsUrl]="displayedColumnsUrl" [datasUrl]="datasUrl" [displayedColumnsFromDb]="displayedColumnsFromDb" [datasUrlFromDb]="datasUrlFromDb"></app-table>
+<app-table *ngIf="loadData" [displayedColumnsUrl]="displayedColumnsUrl" [datasUrl]="datasUrl" [displayedColumnsFromDb]="displayedColumnsFromDb" [datasUrlFromInternal]="datasUrlFromInternal"></app-table>
 
 <button *ngIf="!loadData" mat-button (click)="loadData = true">Preview</button>
 <button *ngIf="loadData" mat-button (click)="addComponent()">Add component</button>

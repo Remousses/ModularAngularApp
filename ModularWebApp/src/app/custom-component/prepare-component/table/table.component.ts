@@ -15,7 +15,7 @@ export class TableComponent extends KnowOurDatasAbstract implements OnInit {
   private readonly querBuilderService = inject(QueryBuilderService);
   
   @Input({ required: true }) displayedColumnsFromDb: string[] = [];
-  @Input({ required: true }) datasUrlFromDb: string = '';
+  @Input({ required: true }) datasUrlFromInternal: string = '';
   @Input({ required: true }) displayedColumnsUrl: string = '';
   @Input({ required: true }) datasUrl: string = '';
 
@@ -32,8 +32,8 @@ export class TableComponent extends KnowOurDatasAbstract implements OnInit {
         this.dataSource = dataSource;
         this.load(this);
       });
-    } else if (this.displayedColumnsFromDb && this.datasUrlFromDb) {
-      this.querBuilderService.getFromCustomQuery(this.datasUrlFromDb, this.displayedColumnsFromDb).subscribe(res =>{
+    } else if (this.displayedColumnsFromDb && this.datasUrlFromInternal) {
+      this.querBuilderService.getFromCustomQuery(this.datasUrlFromInternal, this.displayedColumnsFromDb).subscribe(res =>{
         this.dataSource = res;
         this.displayedColumns = this.displayedColumnsFromDb;
       });

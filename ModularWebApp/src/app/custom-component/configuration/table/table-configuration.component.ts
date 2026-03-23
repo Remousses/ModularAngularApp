@@ -16,7 +16,7 @@ export class TableConfigurationComponent implements OnInit {
   displayedColumnsFromDb: string[] = [];
   displayedColumnsUrl: string = '';
   datasUrl: string = '';
-  datasUrlFromDb: string = '';
+  datasUrlFromInternal: string = '';
   loadData = false;
   tablesInformations: any[] = [];
   tableFieldsName: string[] = [];
@@ -43,9 +43,9 @@ export class TableConfigurationComponent implements OnInit {
           value: this.displayedColumnsFromDb
         },
         {
-          name: 'datasUrlFromDb',
+          name: 'datasUrlFromInternal',
           type: 'String',
-          value: this.datasUrlFromDb
+          value: this.datasUrlFromInternal
         }
       ]
     } else {
@@ -93,7 +93,7 @@ export class TableConfigurationComponent implements OnInit {
     } else {
       this.tableFieldsName = [];
     }
-    this.datasUrlFromDb = QueryBuilderUtil.getCustomQueryUrl(this.tableNameSelected);
+    this.datasUrlFromInternal = QueryBuilderUtil.getCustomQueryUrl(this.tableNameSelected);
   }
 
   tableFieldsChange() {
