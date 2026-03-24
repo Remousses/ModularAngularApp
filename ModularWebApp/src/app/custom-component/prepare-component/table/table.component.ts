@@ -16,7 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class TableComponent extends KnowOurDatasAbstract implements OnInit {
   private readonly apiService = inject(ApiService);
-  private readonly querBuilderService = inject(QueryBuilderService);
+  private readonly queryBuilderService = inject(QueryBuilderService);
 
   readonly displayedColumnsUrl = input.required<string>();
   readonly datasUrl = input.required<string>();
@@ -43,7 +43,7 @@ export class TableComponent extends KnowOurDatasAbstract implements OnInit {
         },
       );
     } else if (displayedColumnsFromDb && datasUrlFromInternal) {
-      this.querBuilderService
+      this.queryBuilderService
         .getFromCustomQuery(
           datasUrlFromInternal,
           displayedColumnsFromDb,

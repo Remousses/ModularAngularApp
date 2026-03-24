@@ -13,7 +13,8 @@ export abstract class KnowOurDatasAbstract {
         delete formatData.knowOurDatasService;
         delete formatData.apiService;
         delete formatData.pageService;
-
+        delete formatData.queryBuilderService;
+        
         this.knowOurDatasService.load(formatData);
     }
 

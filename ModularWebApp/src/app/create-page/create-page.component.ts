@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PageService } from '../service/page.service';
 import { Page } from '../interface/page.interface';
 import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
+import { PagesFacade } from '../+state/pages.facade';
 
 @Component({
     selector: 'app-page',
@@ -13,7 +13,7 @@ import { MatButton } from '@angular/material/button';
 })
 export class CreatePageComponent {
   
-  private readonly pageService = inject(PageService);
+  private readonly pagesFacade = inject(PagesFacade);
   pageForm = new FormGroup({
     title: new FormControl('', { nonNullable: true, validators: Validators.required }),
     url: new FormControl('', { nonNullable: true, validators: Validators.required })
@@ -26,7 +26,7 @@ export class CreatePageComponent {
         title: this.pageForm.getRawValue().title,
         url: this.pageForm.getRawValue().url
       };
-      this.pageService.save(page);
+      this.pagesFacade.savePage(page);
     }
   }
 }

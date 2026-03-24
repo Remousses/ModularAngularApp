@@ -1,10 +1,11 @@
 import { Injectable, Injector, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PageService } from './page.service';
 import { DragAndDropComponent } from '../drag-and-drop/drag-and-drop.component';
 import { Page } from '../interface/page.interface';
 import { HomeComponent } from '../home/home.component';
+import { PageService } from './page.service';
+import { PagesFacade } from '../+state/pages.facade';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ import { HomeComponent } from '../home/home.component';
 export class SettingsService {
 
     private readonly injector = inject(Injector);
-    private readonly pageService = inject(PageService);
+    private readonly pagesService = inject(PageService);
+    private readonly pagesFacade = inject(PagesFacade);
 
     private readonly routes: any[] = [
         {
@@ -26,14 +28,14 @@ export class SettingsService {
     loadSettings(): Promise<any> {
         return new Promise((resolve, reject) => {
             const router = this.injector.get(Router);
-            const loadedRoutes = this.pageService.getLoadedPages();
+            const loadedRoutes = this.pagesFacade.pages();
 
             if (loadedRoutes.length === 0) {
                 router.config = this.routes;
-                return this.pageService.getPages()
+                return this.pagesService.getPages()
                     .subscribe({
                         next: pages => {
-                            this.pageService.setLoadedPages(pages);
+                            this.pagesFacade.setPages(pages);
                             pages.forEach(page => router.config.push(this.pushRouteConfig(page)));
                             resolve(true);
                         },

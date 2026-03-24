@@ -1,14 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Page } from '../interface/page.interface';
-import { ActivatedRoute } from '@angular/router';
 import { ComponentService } from '../service/component.service';
 import { CustomComponent } from '../interface/component.interface';
-import { PageService } from '../service/page.service';
 
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ControlFactoryDirective } from '../directive/control-factory.directive';
+import { PagesFacade } from '../+state/pages.facade';
 
 @Component({
   selector: 'app-drag-and-drop',
@@ -23,18 +22,12 @@ import { ControlFactoryDirective } from '../directive/control-factory.directive'
   ],
   standalone: true,
 })
-export class DragAndDropComponent implements OnInit {
+export class DragAndDropComponent {
   private readonly XY_REGEX = /(\d+)px/g;
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly componentService = inject(ComponentService);
-  private readonly pageService = inject(PageService);
-  page!: Page;
+  private readonly pagesFacade = inject(PagesFacade);
 
-  ngOnInit() {
-    this.activatedRoute.data.subscribe((data: any) => {
-      this.page = data.page;
-    });
-  }
+  currentPage = this.pagesFacade.currentPage;
 
   removeComponent(comp: CustomComponent) {
     this.componentService.deleteById(comp);
@@ -52,7 +45,7 @@ export class DragAndDropComponent implements OnInit {
       this.componentService
         .savePosition(customComponent.id, dropPoint)
         .subscribe((data) => {
-          this.pageService.addSessionPageCustomComponents(page.id!, data);
+          this.pagesFacade.upsertCustomComponent(page.id!, data);
         });
     }
   }
