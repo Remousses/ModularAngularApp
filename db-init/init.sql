@@ -17,6 +17,8 @@ CREATE TABLE custom_component (
     name VARCHAR(100) NOT NULL,
     type VARCHAR(100) NOT NULL,
     drop_point JSON,
+    component_width DOUBLE NULL,
+    component_height DOUBLE NULL,
     page_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (page_id) REFERENCES page(id)

@@ -1,10 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { ComponentService } from '../../../service/component.service';
 import { ComponentTypeConstant } from '../../../util/constant/component-type.constant';
 import { Attribute } from '../../../interface/attribute.interface';
 import { ComponentNameComponent } from '../component-name/component-name.component';
 import { CheckboxComponent } from '../../prepare-component/checkbox/checkbox.component';
 import { MatButton } from '@angular/material/button';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-checkbox-configuration',
@@ -12,9 +14,10 @@ import { MatButton } from '@angular/material/button';
     imports: [ComponentNameComponent, CheckboxComponent, MatButton],
     standalone: true
 })
-export class CheckboxConfigurationComponent {
+export class CheckboxConfigurationComponent implements OnDestroy {
 
   private readonly componentService = inject(ComponentService);
+  private readonly destroy$ = new Subject<void>();
 
   componentName = '';
   checked = false;
@@ -37,6 +40,14 @@ export class CheckboxConfigurationComponent {
         value: this.indeterminate
       }
     ];
-    this.componentService.add(this.componentName, ComponentTypeConstant.CHECKBOX, attributes);
+    const result = this.componentService.add(this.componentName, ComponentTypeConstant.CHECKBOX, attributes);
+    if (result) {
+      result.pipe(takeUntil(this.destroy$)).subscribe();
+    }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

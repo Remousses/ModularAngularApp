@@ -1,7 +1,7 @@
 @if (currentPage(); as currentPage) {
-  <div class="container">
+  <div class="page-canvas">
     @for (comp of currentPage.customComponents; track comp.id) {
-      <div #dragAndDropDiv cdkDrag [cdkDragFreeDragPosition]="comp.dropPoint" (cdkDragEnded)="dragEnd($event, currentPage, comp, dragAndDropDiv)">
+      <div cdkDrag cdkDragBoundary=".page-canvas" [cdkDragFreeDragPosition]="comp.dropPoint" (cdkDragEnded)="dragEnd($event, currentPage, comp)">
         <div class="flex justify-between">
           <div class="flex gap-3">
             <div class="drag-button" cdkDragHandle>

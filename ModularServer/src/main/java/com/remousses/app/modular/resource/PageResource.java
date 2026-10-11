@@ -2,7 +2,8 @@ package com.remousses.app.modular.resource;
 
 import com.remousses.app.modular.model.dto.PageDto;
 import com.remousses.app.modular.service.PageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,17 +34,17 @@ public class PageResource extends AbstractQueryBuilderResource<PageDto, PageServ
 	}
 
 	@GetMapping("{title}")
-	public PageDto getByTitle(@PathVariable String title) {
+	public PageDto getByTitle(@PathVariable @NotBlank(message = "Title cannot be blank") String title) {
 		return this.getService().getByTitle(title);
 	}
 
 	@PostMapping
-	public PageDto save(@RequestBody PageDto pageDto) {
+	public PageDto save(@Valid @RequestBody PageDto pageDto) {
 		return this.getService().save(pageDto);
 	}
 
 	@DeleteMapping("{title}")
-	public void deleteByTitle(@PathVariable String title) {
+	public void deleteByTitle(@PathVariable @NotBlank(message = "Title cannot be blank") String title) {
 		this.getService().deleteByTitle(title);
 	}
 }

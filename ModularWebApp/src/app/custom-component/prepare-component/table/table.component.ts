@@ -1,5 +1,6 @@
-import { Component, inject, OnInit, input } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, inject, OnInit, OnDestroy, input } from '@angular/core';
+import { forkJoin, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { KnowOurDatasAbstract } from 'src/app/abstract/KnowOurDatas.abstract';
 import { ApiService } from 'src/app/service/api.service';
 import { QueryBuilderService } from 'src/app/service/query-builder.service';
@@ -14,9 +15,10 @@ import { MatTableModule } from '@angular/material/table';
   ],
   standalone: true,
 })
-export class TableComponent extends KnowOurDatasAbstract implements OnInit {
+export class TableComponent extends KnowOurDatasAbstract implements OnInit, OnDestroy {
   private readonly apiService = inject(ApiService);
   private readonly queryBuilderService = inject(QueryBuilderService);
+  private readonly destroy$ = new Subject<void>();
 
   readonly displayedColumnsUrl = input.required<string>();
   readonly datasUrl = input.required<string>();
@@ -35,23 +37,29 @@ export class TableComponent extends KnowOurDatasAbstract implements OnInit {
       const $displayColumns = this.apiService.get(displayedColumnsUrl);
       const $dataSource = this.apiService.get(datasUrl);
 
-      forkJoin([$displayColumns, $dataSource]).subscribe(
-        ([displayColumns, dataSource]) => {
+      forkJoin([$displayColumns, $dataSource])
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(([displayColumns, dataSource]) => {
           this.displayedColumns = displayColumns;
           this.dataSource = dataSource;
           this.load(this);
-        },
-      );
+        });
     } else if (displayedColumnsFromDb && datasUrlFromInternal) {
       this.queryBuilderService
         .getFromCustomQuery(
           datasUrlFromInternal,
           displayedColumnsFromDb,
         )
+        .pipe(takeUntil(this.destroy$))
         .subscribe((res) => {
           this.dataSource = res;
           this.displayedColumns = this.displayedColumnsFromDb();
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

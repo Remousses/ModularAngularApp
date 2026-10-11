@@ -20,6 +20,7 @@ import { PagesFacade } from './+state/pages.facade';
     MatIconModule,
     GlobalConfigurationComponent
 ],
+    styleUrls: ['./app.component.scss'],
     standalone: true
 })
 export class AppComponent implements OnInit {

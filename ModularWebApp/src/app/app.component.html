@@ -1,5 +1,11 @@
-<mat-drawer-container class="h-full" autosize>
-  <mat-drawer #menu mode="side" position="start" [opened]="true">
+<mat-drawer-container class="app-shell" [hasBackdrop]="false">
+  <mat-drawer #menu class="menu-drawer" mode="over" position="start">
+    <div class="drawer-header">
+      <span>Pages</span>
+      <button mat-icon-button type="button" aria-label="Close page navigation" (click)="menu.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <mat-nav-list>
       <a mat-list-item  routerLink="home">home</a>
       @for (page of pages(); track page.id) {
@@ -7,18 +13,28 @@
       }
     </mat-nav-list>
   </mat-drawer>
-  <mat-drawer #globalConfig mode="side"  position="end" [opened]="true">
+  <mat-drawer #globalConfig class="config-drawer" mode="over" position="end">
+    <div class="drawer-header">
+      <span>Configuration</span>
+      <button mat-icon-button type="button" aria-label="Close configuration panel" (click)="globalConfig.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <app-global-configuration></app-global-configuration>
   </mat-drawer>
 
-  <div class="flex justify-between">
-    <button mat-button mat-button (click)="menu.toggle()">
+  <mat-drawer-content class="app-content">
+    <header class="app-toolbar">
+      <button mat-icon-button type="button" aria-label="Toggle page navigation" [attr.aria-expanded]="menu.opened" (click)="menu.toggle()">
       <mat-icon>menu</mat-icon>
-    </button>
-    <button mat-button mat-button (click)="globalConfig.toggle()">
+      </button>
+      <button mat-icon-button type="button" aria-label="Toggle configuration panel" [attr.aria-expanded]="globalConfig.opened" (click)="globalConfig.toggle()">
       <mat-icon>more_vert</mat-icon>
-    </button>
-  </div>
+      </button>
+    </header>
 
-  <router-outlet></router-outlet>
+    <main class="app-workspace">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
 </mat-drawer-container>

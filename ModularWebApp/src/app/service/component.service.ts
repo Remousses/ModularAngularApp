@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { CustomComponent } from "../interface/component.interface";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { UrlConstant } from "../util/constant/url.constant";
 import { Attribute } from "../interface/attribute.interface";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -22,7 +22,7 @@ export class ComponentService {
         return this.http.post<CustomComponent>(UrlConstant.componentUrl, clone);
     }
 
-    add(componentName: string, componentType: string, attributes: Attribute[]) {
+    add(componentName: string, componentType: string, attributes: Attribute[]): Observable<CustomComponent> | void {
         if (!componentName) {
             return;
         }
@@ -37,8 +37,9 @@ export class ComponentService {
             };
             this.avoidCircularError(customComponent);
             const clone = structuredClone(customComponent);
-            this.http.post<CustomComponent>(UrlConstant.componentUrl + 'add/' + customComponent.page.id, clone)
-                .subscribe(data => this.pagesFacade.upsertCustomComponent(page.id!, data));
+            return this.http.post<CustomComponent>(UrlConstant.componentUrl + 'add/' + customComponent.page.id, clone).pipe(
+                tap(createdComponent => this.pagesFacade.upsertCustomComponent(page.id!, createdComponent))
+            );
         } else {
             this.snackBar.open('Current page not stored in database', 'Close', { duration: 4000 });
         }
@@ -49,10 +50,10 @@ export class ComponentService {
     }
 
     private avoidCircularError(customComponent: CustomComponent) {
-        customComponent.page.customComponents = [];
+        customComponent.page = { ...customComponent.page, customComponents: [] };
     }
 
-    deleteById(comp: CustomComponent) {
+    deleteById(comp: CustomComponent): Observable<void> | void {
         if (!comp) {
             return;
         }
@@ -60,8 +61,7 @@ export class ComponentService {
         const page = this.pagesFacade.currentPage();
 
         if (page?.id) {
-            this.http.delete<void>(UrlConstant.componentUrl + comp.id)
-                .subscribe(_ => this.pagesFacade.deleteCustomComponent(page.id!, comp.id));
+            return this.http.delete<void>(UrlConstant.componentUrl + comp.id);
         } else {
             this.snackBar.open('Current page not stored in database', 'Close', { duration: 4000 });
         }

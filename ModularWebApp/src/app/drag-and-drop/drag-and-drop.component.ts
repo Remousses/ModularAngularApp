@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { Page } from '../interface/page.interface';
 import { ComponentService } from '../service/component.service';
 import { CustomComponent } from '../interface/component.interface';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ControlFactoryDirective } from '../directive/control-factory.directive';
@@ -22,44 +24,44 @@ import { PagesFacade } from '../+state/pages.facade';
   ],
   standalone: true,
 })
-export class DragAndDropComponent {
-  private readonly XY_REGEX = /(\d+)px/g;
+export class DragAndDropComponent implements OnDestroy {
   private readonly componentService = inject(ComponentService);
   private readonly pagesFacade = inject(PagesFacade);
+  private readonly destroy$ = new Subject<void>();
 
   currentPage = this.pagesFacade.currentPage;
 
   removeComponent(comp: CustomComponent) {
-    this.componentService.deleteById(comp);
+    const result = this.componentService.deleteById(comp);
+    if (result) {
+      result.pipe(takeUntil(this.destroy$)).subscribe(() => {
+        const page = this.pagesFacade.currentPage();
+        if (page?.id) {
+          this.pagesFacade.deleteCustomComponent(page.id, comp.id);
+        }
+      });
+    }
   }
 
   dragEnd(
-    event: any,
+    event: CdkDragEnd,
     page: Page,
     customComponent: CustomComponent,
-    div: HTMLDivElement,
   ) {
-    const dropPoint = this.retrieveXY(div.style.transform);
+    const dropPoint = event.source.getFreeDragPosition();
 
     if (customComponent.id) {
       this.componentService
         .savePosition(customComponent.id, dropPoint)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data) => {
           this.pagesFacade.upsertCustomComponent(page.id!, data);
         });
     }
   }
 
-  retrieveXY(inputString: string) {
-    const matches = [];
-    let match;
-    while ((match = this.XY_REGEX.exec(inputString)) !== null) {
-      matches.push(Number(match[1]));
-    }
-
-    return {
-      x: matches[0],
-      y: matches[1],
-    };
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Attribute } from 'src/app/interface/attribute.interface';
 import { TableInformationService } from 'src/app/service/table-information.service';
 import { QueryBuilderUtil } from 'src/app/util/query-builder.util';
@@ -29,8 +31,9 @@ import { MatButton } from '@angular/material/button';
   ],
   standalone: true,
 })
-export class TableConfigurationComponent implements OnInit {
+export class TableConfigurationComponent implements OnInit, OnDestroy {
   private readonly tableInformationService = inject(TableInformationService);
+  private readonly destroy$ = new Subject<void>();
 
   componentName = '';
   displayedColumnsFromDb: string[] = [];
@@ -88,16 +91,18 @@ export class TableConfigurationComponent implements OnInit {
   }
 
   getTableInformations() {
-    this.tableInformationService.get().subscribe((info) => {
-      this.tablesInformations.length = 0;
-      this.tableFieldsName.length = 0;
-      Object.entries(info).forEach((value) => {
-        this.tablesInformations.push({
-          name: value[0],
-          fields: value[1],
+    this.tableInformationService.get()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((info) => {
+        this.tablesInformations.length = 0;
+        this.tableFieldsName.length = 0;
+        Object.entries(info).forEach((value) => {
+          this.tablesInformations.push({
+            name: value[0],
+            fields: value[1],
+          });
         });
       });
-    });
   }
 
   tableInformationChange() {
@@ -122,7 +127,12 @@ export class TableConfigurationComponent implements OnInit {
 
   tableFieldsChange() {
     this.displayedColumnsFromDb = this.tableFieldsSelected.map(
-      (e) => e.split('#')[0],
+      (e) => e.split('#')[0]
     );
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

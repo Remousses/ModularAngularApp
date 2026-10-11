@@ -33,30 +33,36 @@ export class ControlFactoryDirective {
             }
 
             if(!ComponentTypeConstant.TYPE_MAP[componentType]) {
-                throw new Error(`No class defined in TYPE_MAP for '${componentType}'`);
+                console.error(`No class defined in TYPE_MAP for '${componentType}'`);
+                return;
             }
             
             const compRef = this.container.createComponent(ComponentTypeConstant.TYPE_MAP[componentType]);
             
             if (attributes) {
                 attributes.forEach(attr => {
-                    switch (attr.type) {
-                        case 'Boolean':
-                            attr.value = (/true/i).test(attr.value);
-                            break;
-                        case 'Number':
-                            attr.value = Number.parseInt(attr.value);
-                            break;
-                        case 'Float':
-                            attr.value = Number.parseFloat(attr.value);
-                            break;
-                        case 'Array':
-                            attr.value = JSON.parse(attr.value);
-                            break;
+                    try {
+                        switch (attr.type) {
+                            case 'Boolean':
+                                attr.value = (/true/i).test(attr.value);
+                                break;
+                            case 'Number':
+                                attr.value = Number.parseInt(attr.value);
+                                break;
+                            case 'Float':
+                                attr.value = Number.parseFloat(attr.value);
+                                break;
+                            case 'Array':
+                                attr.value = JSON.parse(attr.value);
+                                break;
+                        }
+                        compRef.setInput(attr.name, attr.value);
+                    } catch (error) {
+                        console.error(`Error setting attribute '${attr.name}' for component '${componentType}':`, error);
                     }
-                    compRef.setInput(attr.name, attr.value)
                 });
             }
         });
     }
 }
+

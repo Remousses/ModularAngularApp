@@ -1,11 +1,13 @@
 import { Injectable, Injector, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 import { DragAndDropComponent } from '../drag-and-drop/drag-and-drop.component';
 import { Page } from '../interface/page.interface';
 import { HomeComponent } from '../home/home.component';
 import { PageService } from './page.service';
 import { PagesFacade } from '../+state/pages.facade';
+import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +17,7 @@ export class SettingsService {
     private readonly injector = inject(Injector);
     private readonly pagesService = inject(PageService);
     private readonly pagesFacade = inject(PagesFacade);
+    private readonly errorHandler = inject(ErrorHandlerService);
 
     private readonly routes: any[] = [
         {
@@ -32,17 +35,16 @@ export class SettingsService {
 
             if (loadedRoutes.length === 0) {
                 router.config = this.routes;
-                return this.pagesService.getPages()
-                    .subscribe({
-                        next: pages => {
-                            this.pagesFacade.setPages(pages);
-                            pages.forEach(page => router.config.push(this.pushRouteConfig(page)));
-                            resolve(true);
-                        },
-                        error: error => {
-                            alert(error);
-                            reject(false);
-                        }
+                return firstValueFrom(this.pagesService.getPages())
+                    .then(pages => {
+                        this.pagesFacade.setPages(pages);
+                        pages.forEach(page => router.config.push(this.pushRouteConfig(page)));
+                        this.errorHandler.handleSuccess('Application initialized successfully', 'Welcome');
+                        resolve(true);
+                    })
+                    .catch(error => {
+                        this.errorHandler.handleError(error, 'Settings Loading');
+                        reject(false);
                     });
             }
             router.config = this.routes;

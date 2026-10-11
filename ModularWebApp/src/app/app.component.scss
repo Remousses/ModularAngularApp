@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  height: 100dvh;
+}
+
+.app-shell {
+  height: 100%;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-toolbar {
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  flex: 0 0 3.5rem;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.app-workspace {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.drawer-header {
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  min-height: 3.5rem;
+  padding: 0 0.75rem 0 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.menu-drawer {
+  border-right: 1px solid #e5e7eb;
+  max-width: 85vw;
+  overflow-y: auto;
+  width: min(18rem, 85vw);
+}
+
+.config-drawer {
+  border-left: 1px solid #e5e7eb;
+  max-width: 90vw;
+  overflow-y: auto;
+  width: min(32rem, 90vw);
+}

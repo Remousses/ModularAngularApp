@@ -2,12 +2,15 @@ package com.remousses.app.modular.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.remousses.app.modular.model.dto.CustomComponentDto;
+import com.remousses.app.modular.model.dto.ComponentSizeDto;
 
 public interface CustomComponentService {
 
     CustomComponentDto save(CustomComponentDto customComponentDto);
 
     CustomComponentDto savePosition(Integer id, JsonNode dropPoint);
+
+    CustomComponentDto saveSize(Integer id, ComponentSizeDto size);
 
     void deleteById(Integer id);
 }

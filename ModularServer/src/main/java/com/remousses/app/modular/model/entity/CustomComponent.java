@@ -34,6 +34,12 @@ public class CustomComponent {
 	@Column(name = "drop_point")
 	private JsonNode dropPoint;
 
+	@Column(name = "component_width")
+	private Double width;
+
+	@Column(name = "component_height")
+	private Double height;
+
 	@NotNull
 	@JsonIgnore
 	@ManyToOne
